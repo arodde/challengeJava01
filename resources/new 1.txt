@@ -1,0 +1,6 @@
+url
+https://api.meteo-concept.com/api/
+
+Toutes les routes de l'API commencent par cette URL à laquelle s'ajoute le chemin vers la ressource désirée. Exemple : 
+https://api.meteo-concept.com/api/forecast/nextHours
+pour obtenir les prévisions pour les 12 prochaines heures, la localisation de la prévision étant données dans les paramètres de la requête
