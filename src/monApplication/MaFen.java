@@ -85,10 +85,12 @@ public class MaFen extends JFrame {
         // test connection
 //        String testedUrl = "https://openclassrooms.com/";
         String testedUrl = "https://api.meteo-concept.com/api/";
-        boolean resultConnectivity = false;
+//        boolean resultConnectivity = false;
+
         try {
             URL url = new URL(testedUrl);
             URLConnection connection = url.openConnection();
+
             connection.connect();
             System.out.println("1");
             System.out.println("Vous êtes connectés à internet");
