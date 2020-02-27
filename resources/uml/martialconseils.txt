@@ -1,0 +1,17 @@
+visual paradigm  --> uml
+
+analyse
+
+use case
+scenarios
+maquette 
+diagramme de classes
+diagramme d'activité
+
+tant que pas clair
+	use case
+	maquette 
+	diagramme de classes
+	diagramme d'activité
+	
+diagrammes évolutifs

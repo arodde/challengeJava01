@@ -1,0 +1,12 @@
+challengeJava
+	MaFen
+		initSearch()
+			Scanner sc = new Scanner(System.in);
+			String localeVariable = sc.nextLine();
+		// this function helps to know if the user has enterel the name of a city (or a part) or a insee numerous.
+		
+		bool isInseeNumerous();
+		// insee numerous implies the string number has a length of five characters
+		// insee numerous is composed of the number of "département" and the "code Commune"
+		StringUtils.inNumeric(String:inputCity.getText())
+		
