@@ -1,0 +1,61 @@
+class Mafen extend JFrame implement runnable
+	attributes
+		JPanel top, bottom
+		boolean connectionIsActive
+		Thread threadConnection
+	functions
+		Mafen()
+			instantiate the panels, the label in bottom panel
+			connectionIsActive = false
+			
+		boolean readyForInput()
+			test for do while loop
+				true:
+					empty the label in bottom panel
+					instantiate the labels and the input field in the top panel
+					display them
+				false:
+					message in the label bottom panel
+					
+			
+class
+	attributes
+		
+	functions
+		
+	
+class
+	attributes
+		
+	function
+		
+	
+class
+	attributes
+		
+	functions
+		
+	
+class
+	attributes
+		
+	functions
+		
+	
+class
+	attributes
+		
+	functions
+		
+	
+class
+	attributes
+		
+	functions
+		
+	
+class
+	attributes
+		
+	functions
+		

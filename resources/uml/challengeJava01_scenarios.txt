@@ -3,49 +3,59 @@ Scénarios ChallengeJava01
 A.	
 Scénarios nomminaux
 --------------------
-1.
-The user inputs an insee numeral of a city in the entry field.
-2.
-The app checks the internet connection when the focus on the entry field is lost.
+[loop do while]
+note: The internet connection is tested with a thread. At the loop's exit the internet connection is active.
+1. [the condition] 
+The app tests the internet connection in the window is visible and the window has the focus.
+2.1. [false] 
+The label in the bottom panel, the message "your device is offline" is display in this label.
+2.2. [true] "connection is active"
+The label in the bottom panel is empty. The input field and the labels are instantiate. they displays in the window on the top panel.
 3.
-the internet connection is tested with the url of API meteo-concept. the url is composed of a token and a correct insee numeral of a city which allows to get e server response.
-4.
-the api returns a response: a HTTP code 200.
-5.
-the api converts the JSON file receipted into a JSON object
+The user inputs an insee numerous of a city in the entry field.
+4. 
+The request is preared. The url of API meteo-concep is composed of a token and a correct insee numerous of a city. 
+5. 
+the request is send.
 6.
-the app checks if the response is an objet which the type is a city. 
- The app returns only one city if the user has entered an insee's numerous of a city.
-7.
-if the response is a city, a jTable object is created to fill a JTable object of the application.
-8.
-the table is add to the frame of the application.
-9.
-the user consults the app with the displayed frame.
+the api returns a response: a HTTP code 200.
+7. 
+The api converts the JSON file receipted into a JSON object.
+8. 
+The app checks if the response is an objet which the type is a city. 
+The app returns only one city if the user has entered an insee's numerous of a city.
+9. 
+The response is a city, a jTable object is created to fill a JTable object of the application.
+10. 
+The table is add to the frame of the application.
+11. 
+The user consults the app with the displayed frame.
+
 ----------------------
 B. 
 Alternative scenarios
 ----------------------
-1A.
+3A.
 The user inputs a city's name in the entry field.
-the process follows steps to number 2 to number  5
-6A1-1.(following step 1a.)
+the process follows step 4 to step 7.
+8A1-1.(following step 3A.)
 the app checks if the response is an objet which the type is an array of cities. 
 (the object getted is an array of cities if the user has gived a name of city. the server response is composed of all the names of cities which containes the same string of characters inputed by the user.)
-	6A1-2. 
+	8A1-2. 
 	if the response is an array of cities, then for each element of the array :
-	6A1-3.
+	8A1-3.
 	a JTABLE is created and filled with the fields of the object getted.
-	6A1-4.
+	8A1-4.
 	each JTABLE is added to the frame.
 -------------------
 C. wrong scenarios
 -------------------
-3E1. The server response is 400 because the insee numerous is absent or wrong.
-3E2. The server response is 400 because the name of cities isn't found in the list of cities in the API.
-3E3. The server response is 401 because the token is absent or invalid
-3E3. The server response is 403 because the total number of valid request authorized for the subscription.
-3E3. The server response is 404 because the url is unknown.
-3E3. The server response is 500 because the servor has an error
-3E3. The server response is 503 because the API is unavailable.
+6E1. The server response is 400 because the insee numerous is absent or wrong.
+6E2. The server response is 400 because the name of cities isn't found in the list of cities in the API.
+6E3. The server response is 401 because the token is absent or invalid
+6E3. The server response is 403 because the total number of valid request authorized for the subscription.
+6E3. The server response is 404 because the url is unknown.
+6E3. The server response is 500 because the servor has an error
+6E3. The server response is 503 because the API is unavailable.
+
 
