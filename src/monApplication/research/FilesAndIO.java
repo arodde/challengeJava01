@@ -1,17 +1,17 @@
-package monApplication.serial;
+package monApplication.research;
 
 import java.io.*;
 import java.util.Scanner;
 
-public class filesAndIO {
+public class FilesAndIO {
     private Employee e ;
     private Scanner scanner;
     public static void main(String[] args){
-        filesAndIO filesAndIO = new filesAndIO();
+        FilesAndIO filesAndIO = new FilesAndIO();
 
 
     }
-    public filesAndIO(){
+    public FilesAndIO(){
         scanner = new Scanner(System.in);
         Employee e = new Employee();
         e.address = "Phokka Kuan, Ambehta Peer";
