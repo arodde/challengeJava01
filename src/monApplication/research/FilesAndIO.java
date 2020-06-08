@@ -22,13 +22,12 @@ public class FilesAndIO {
 //        copyContentFirstFileInSecondFile();
 //        copyCharactersFirstFileInSecondFile();
 //        standardStream();
-//
 //        jeuneIntermitant();
-        useOutPutStream();
+//        useOutPutStream();
+//        bufferedReaderExample();
+        bufferedWriterExample();
 //        xxxx();
 //        xxx();
-//        xx();
-//        x();
         scanner.close();
     }
     public void copyContentFirstFileInSecondFile(){
@@ -142,45 +141,6 @@ public class FilesAndIO {
             }
         }
     }
-    public void jeuneIntermitant(){
-        /**
-         *
-         */
-        int heure1 = 25;
-        int heure2 = 25;
-        int ecart_1_2 = 0;
-        int ecart_2_1 = 0;
-        while(heure1<0 || heure1 >24){
-            System.out.println("Entrer l'heure premier repas: ");
-            heure1 = scanner.nextInt();
-        }
-        while(heure2<0 || heure2 >24){
-            System.out.println("Entrer l'heure second repas: ");
-            heure2 = scanner.nextInt();
-        }
-        int i = 0;
-        int val = heure1;
-        while(val < heure2){
-            val++;
-            i++;
-        }
-        System.out.println("Entre h1 et h2 : "+ i +"heures.");
-        ecart_1_2 = i;
-        i=0;
-        val= heure2;
-        while(val != heure1){
-            val++;
-            if (val == 24)
-                val =0;
-            i++;
-        }
-        System.out.println("Entre h2 et h1 : "+ i +"heures.");
-        ecart_2_1 = i;
-        if( ecart_1_2 >= 14 || ecart_2_1 >= 14)
-            System.out.println("Méthode respectée");
-        else
-            System.out.println("Jeûne trop court");
-    }
     public void useOutPutStream(){
         /**
          *
@@ -204,17 +164,67 @@ public class FilesAndIO {
             System.out.print("Exception");
         }
     }
-    public void x(){
+    public void bufferedReaderExample(){
         /**
-         *
+         * writes in the console the content of a file with a buffer
          */
+        FileReader fr= null;
+        try {
+            fr = new FileReader("xyztmp/testout.txt");
+            System.out.println("fichier testout.txt trouvé.");
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+            System.out.println("exception levée sur FileReader: fichier non trouvé");
+        }
+        BufferedReader br=new BufferedReader(fr);
 
+        int i=-1;
+        while(true){
+            try {
+                if (!((i=br.read())!=-1)) break;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            System.out.print((char)i);
+        }
+        try {
+            br.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            System.out.println("exception levée sur fermeture du BufferedReader");
+        }
+        try {
+            fr.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            System.out.println("exception levée sur fermeture du FileReader");
+        }
     }
-    public void xx(){
+    public void bufferedWriterExample(){
         /**
-         *
+         * writes the content input by keyboard in a file with a buffer
+         * the precedent content is totally replaced
          */
-
+        File file =null;
+        FileWriter writer = null;
+        try {
+            file = new File("xyztmp/testout.txt");
+            writer = new FileWriter(file);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        BufferedWriter buffer = new BufferedWriter(writer);
+        try {
+            buffer.write("Welcome to javaTpoint.");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        try {
+            buffer.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        System.out.println("Success");
     }
     public void xxx(){
         /**
