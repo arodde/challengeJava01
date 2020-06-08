@@ -12,12 +12,12 @@ import java.net.URL;
 import java.net.URLConnection;
 
 
-public class MaFen extends JFrame {
-    public JLabel jLabelCity = new JLabel();
-    public JTextField jTextField = new JTextField();
-    public JLabel jLabel = new JLabel();
-    public JPanel interact = new JPanel();
-    public JPanel result = new JPanel();
+public class MaFen extends JFrame  {
+    public JLabel cityLabel = new JLabel();
+    public JTextField cityWeatherInformations = new JTextField();
+    public JLabel errorLabel = new JLabel();
+    public JPanel top = new JPanel();
+    public JPanel bottom = new JPanel();
     public JPanel mainPanel = new JPanel();
     public TestConnection testConnection = new TestConnection();
     public JTable weatherJTable;
@@ -29,7 +29,11 @@ public class MaFen extends JFrame {
 
 
     public static void main(String[] args) {
+        Uti.info("","","");
         MaFen mafen = new MaFen();
+//        // serialization/deserialization test. It doesn't order with JSON
+//             Uti.utilisationSerializationAndDeserializationFile();
+
     }
 
     public MaFen() {
@@ -47,36 +51,36 @@ public class MaFen extends JFrame {
 // add borderLayout in mainPanel
         BorderLayout borderLayout = new BorderLayout();
         // préparation components
-        jTextField.setSize(200,60);
-        jTextField.setBackground(Color.CYAN);
-        jTextField.setBackground(Color.white);
-        jTextField.addFocusListener(testConnection);
-        jTextField.setText("                     ");
-        jLabel.setSize(new Dimension(200,60));
-        jLabel.setBackground(Color.white);
-        jLabelCity.setText("Ville : ");
-        result.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
-        result.setBackground(Color.red);
-        interact.setPreferredSize(new Dimension(this.getWidth(), 50));
+        cityWeatherInformations.setSize(200,60);
+        cityWeatherInformations.setBackground(Color.CYAN);
+        cityWeatherInformations.setBackground(Color.white);
+        cityWeatherInformations.addFocusListener(testConnection);
+//        jTextField.requestFocusInWindow();// get the focus on the textfield
+        cityWeatherInformations.setText("                                ");
+        errorLabel.setSize(new Dimension(200,60));
+        errorLabel.setBackground(Color.white);
+        cityLabel.setText("Ville : ");
+        bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
+        bottom.setBackground(Color.red);
+        top.setPreferredSize(new Dimension(this.getWidth(), 50));
 //        interact.add(jbuttonAskWeatherInformations,BorderLayout.WEST);
         // give the response to internet connection test
         // add elements
-        interact.add(jLabelCity, BorderLayout.WEST);
-        interact.add(jTextField, BorderLayout.CENTER);
-        interact.add(jLabel, BorderLayout.WEST);
-        interact.setBackground(Color.gray);
+        top.add(cityLabel, BorderLayout.WEST);
+        top.add(cityWeatherInformations, BorderLayout.CENTER);
+        top.add(errorLabel, BorderLayout.WEST);
+        top.setBackground(Color.gray);
         mainPanel.setBackground(Color.white);
-        mainPanel.add(interact, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(result), BorderLayout.CENTER);
+        mainPanel.add(top, BorderLayout.NORTH);
+        mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
 //        jbuttonAskWeatherInformations.addActionListener(askApi);
         // display the window
         this.setContentPane(mainPanel);
         this.setVisible(true);
 //        testedUrl = new URL(requestApi.url);
     }
-
     public boolean testInternetConnection() {
-        uti.Uti.info("MaFen", "testInternetConnection", "");
+       Uti.info("MaFen", "testInternetConnection", "");
         /**
          *  this function test if the client is connected to internet and return a boolean
          *  true if the internet connection orders. The url is correct OR NOT correct
@@ -94,17 +98,17 @@ public class MaFen extends JFrame {
             connection.connect();
             System.out.println("1");
             System.out.println("Vous êtes connectés à internet");
-            jLabel.setText("Vous êtes connectés à internet");
+            errorLabel.setText("Vous êtes connectés à internet");
             return true;
         } catch (MalformedURLException e) {
             System.out.println("2");
             System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-            jLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
             return false;
         } catch (IOException e) {
             System.out.println("3");
             System.out.println("Une connexion à internet est requise");
-            jLabel.setText("Une connexion à internet est requise");
+            errorLabel.setText("Une connexion à internet est requise");
             return false;
         }
     }
@@ -117,6 +121,7 @@ public class MaFen extends JFrame {
 
 /*
     public void CreateMyWeatherDataJtable(){
+Uti.info("MaFen","CreateMyWeatherDataJtable","");
 
 
         // Data to be displayed in the JTable
@@ -146,12 +151,20 @@ public class MaFen extends JFrame {
         Thread threadOfConnection;
         @Override
         public void focusGained(FocusEvent e) {
+Uti.info("TestConnection","focusGained","");
+
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Uti.info("TestConnection","focusLost","");
             /**
              * check if the internet's connection orders and if the url is real.
              */
             // check the text in jEditorPaneCity
             // if it's different of "" or null
-            if(jTextField.getText()!=""|| jTextField != null)
+            if(cityWeatherInformations.getText()!=""|| cityWeatherInformations != null)
             {
                 //      check internet connection
                 boolean connectionOk= false;
@@ -172,14 +185,8 @@ public class MaFen extends JFrame {
                     System.out.println("échec de connexion");
                 }
             }
-
-
         }
 
-        @Override
-        public void focusLost(FocusEvent e) {
-
-        }
     }
 
 }

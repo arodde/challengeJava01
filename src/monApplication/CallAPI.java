@@ -13,7 +13,6 @@ public class CallAPI implements Runnable {
     public CallAPI(RequestApi requestApi, String stringJSON){
         Uti.info("callAPI","callAPI","");
         this.requestApi = requestApi;
-
     }
     @Override
     public void run() {
@@ -22,20 +21,21 @@ public class CallAPI implements Runnable {
         Uti.mess("C'est ici que l'appel de la récupération  des données se fera via un thread distinct");
         //connectionImplementation();
 
-        // création requête :
+        // request creation :
         // HttpURLConnection
         // https://api.meteo-concept.com/api/forecast/nextHours?token=MON_TOKEN
 
         String formulesPossibles[]= new String[6];
         String token;
-        formulesPossibles[0] ="location/cities";
+        String insee="23564";
+        String param=(insee!=""?"&insee="+insee:"");
+        formulesPossibles[0] ="location/city";
         formulesPossibles[1] ="forecast/nextHours";
         formulesPossibles[2] ="forecast/daily";
         formulesPossibles[3] ="forecast-period";
         formulesPossibles[4] ="forecast-hour";
         formulesPossibles[5] ="forecast-map-day";
         token ="3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
-
         try {
             // GET
             // this url is composed of the forecast type and the token
@@ -43,14 +43,14 @@ public class CallAPI implements Runnable {
                     "https",
                     "api.meteo-concept.com",
                     "/api/"+formulesPossibles[0]+"?"+
-                            "token="+token);
+                            "token="+token+param);
             System.out.println(url.toString());
             // read directly url
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(url.openStream()));
 
-              /*
         // todo serverAnswers exceptions or switch
+              /*
         String serverMessage;
         int serverAnswer = 0;
         switch (serverAnswer){
@@ -96,10 +96,9 @@ public class CallAPI implements Runnable {
                 System.out.println("");
         }
         */
-            Uti.mess("in : "+in.toString());
             String inputLine;
             while ((inputLine = in.readLine()) != null)
-                System.out.println(inputLine);
+            System.out.println(inputLine); // cities array
             in.close();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -107,6 +106,9 @@ public class CallAPI implements Runnable {
             e.printStackTrace();
         }
         Uti.mess("sortie run");
+
+
+
     }
 
         /*    public void connectionImplementation(URL url) throws IOException {
