@@ -1,0 +1,32 @@
+
+
+Sr.No.	Method & Description
+1	
+public void close() throws IOException{}
+
+This method closes the file output stream. Releases any system resources associated with the file. Throws an IOException.
+
+2	
+protected void finalize()throws IOException {}
+
+This method cleans up the connection to the file. Ensures that the close method of this file output stream is called when there are no more references to this stream. Throws an IOException.
+
+3	
+public void write(int w)throws IOException{}
+
+This methods writes the specified byte to the output stream.
+
+4	
+public void write(byte[] w)
+
+Writes w.length bytes from the mentioned byte array to the OutputStream.ffffffffffffffffffffffffffffffffffffffffffffffffffff
+
+https://github.com/arodde/CarreMagique
+
+bouygues :
+CORDON ELECTRONICS
+Batiment A6 OUEST
+Activité HUB BYT
+11 rue du Nouette
+ZI de QUEVERT
+22103 DINAN
