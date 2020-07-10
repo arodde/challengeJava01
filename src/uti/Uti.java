@@ -1,5 +1,12 @@
 package uti;
 
+import monApplication.research.Employee;
+
+import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public  class Uti{
@@ -85,5 +92,81 @@ public  class Uti{
     }
     public static void sep(){
         System.out.println("-------------------------------------------------------------------------");
+    }
+    public static void utilisationSerializationAndDeserializationFile(){
+        /*
+         *  pour un fichier d'extension .ser
+         *   crée un fichier .ser
+         *   crée un objet à partir du fichier .ser
+         *   RIEN A VOIR AVEC LE FORMAT JSON
+         * */
+        String fname ="xyztmp\\employee.ser";
+        obVersFi(fname);
+        fiVersOb(fname);
+    }
+    public static void obVersFi(String fname){ // serialization
+        Employee e = new Employee();
+        e.name = "Reyan Ali";
+        e.address = "Phokka Kuan, Ambehta Peer";
+        e.SSN = 11122333;
+        e.number = 101;
+
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream(fname);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(e);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in /xyztmp/employee.ser");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+
+    }
+    public static void fiVersOb(String fname){ // deserialization
+        Employee e = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(fname);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            e = (Employee) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return;
+        }
+
+        System.out.println("Deserialized Employee...");
+        System.out.println("Name: " + e.name);
+        System.out.println("Address: " + e.address);
+        System.out.println("SSN: " + e.SSN);
+        System.out.println("Number: " + e.number);
+    }
+    public static Map<String, Object> getFieldNamesAndValues(final Object obj, boolean publicOnly)
+            throws IllegalArgumentException,IllegalAccessException
+    {
+        Class<? extends Object> c1 = obj.getClass();
+        Map<String, Object> map = new HashMap<String, Object>();
+        Field[] fields = c1.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            String name = fields[i].getName();
+            if (publicOnly) {
+                if(Modifier.isPublic(fields[i].getModifiers())) {
+                    Object value = fields[i].get(obj);
+                    map.put(name, value);
+                }
+            }
+            else {
+                fields[i].setAccessible(true);
+                Object value = fields[i].get(obj);
+                map.put(name, value);
+            }
+        }
+        return map;
     }
 }

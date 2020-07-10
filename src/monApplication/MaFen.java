@@ -1,5 +1,6 @@
 package monApplication;
 
+import org.json.JSONObject;
 import uti.Uti;
 
 import javax.swing.*;
@@ -13,6 +14,9 @@ import java.net.URLConnection;
 
 
 public class MaFen extends JFrame  {
+
+
+
     public JLabel cityLabel = new JLabel();
     public JTextField cityWeatherInformations = new JTextField();
     public JLabel errorLabel = new JLabel();
@@ -26,14 +30,14 @@ public class MaFen extends JFrame  {
     public String request = "";
     public String stringJSON ="";
     public RequestApi requestApi = new RequestApi();
-
+ public JSONObject jsonObject=null;
 
     public static void main(String[] args) {
         Uti.info("","","");
         MaFen mafen = new MaFen();
+
 //        // serialization/deserialization test. It doesn't order with JSON
 //             Uti.utilisationSerializationAndDeserializationFile();
-
     }
 
     public MaFen() {
