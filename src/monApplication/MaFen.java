@@ -38,6 +38,12 @@ public class MaFen extends JFrame  {
 
 //        // serialization/deserialization test. It doesn't order with JSON
 //             Uti.utilisationSerializationAndDeserializationFile();
+        /*
+            TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
+            String s = "xyztmp/tutoJsonSimple/city.json";
+            City myCity = tutorialJSONSimple.displaysCityJSONStringContentFromJsonFile(s);
+            System.out.println(myCity.toString());
+        */
     }
 
     public MaFen() {

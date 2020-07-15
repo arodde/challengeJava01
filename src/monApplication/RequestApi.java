@@ -1,6 +1,7 @@
 package monApplication;
 
 import monApplication.classApi.City;
+import monApplication.research.TutorialJSONSimple;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -43,13 +44,14 @@ public class RequestApi  {
         RequestApi requestApi = new RequestApi();
     }
     RequestApi(){
-
+        Uti.info("RequestApi","RequestApi()","");
         initialisation();
         x1a();
 //        x1b();
 //        x2();
     }
     public void initialisation(){
+        Uti.info("RequestApi","initialisation()","");
         forecastType[0] = "location/city";
         forecastType[1] = "location/cities";
         forecastType[2] = "forecast/nextHours";
@@ -79,7 +81,7 @@ public class RequestApi  {
         Uti.info("RequestApi","x1a","");
         City city=new City();
         JSONArray jsonArrayCity = null;
-        String insee="10000";
+        String insee="10300";
         param=(insee!=""?"&insee="+insee:"");
         try {
             // GET
@@ -87,6 +89,7 @@ public class RequestApi  {
             URL url = urlConception(forecastType[0],token,param);
             System.out.println(url);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String antS =readStream(in);
@@ -111,6 +114,11 @@ public class RequestApi  {
                     System.out.println("city : " +  map.get("city"));
                     JSONParser jsonParser1 = new JSONParser();
                     System.out.println(s);
+
+                    TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
+//                    String s = "xyztmp/tutoJsonSimple/city.json";
+                    city = tutorialJSONSimple.displaysCityJSONStringContentFromJsonString(s);
+                    System.out.println(city.toString());
 
 //                    TutorialJSONSimple tutorialJSONSimple = new TutorialJSONSimple();
 //                    Object object =  tutorialJSONSimple.displaysCityJSONStringContent(s);
@@ -311,7 +319,7 @@ public class RequestApi  {
 //    }
     public URL urlConception(String forecastType, String token, String param) throws MalformedURLException {
         /**
-         * retur url for a specific request
+         * returns url for a specific request
          * --> forecastType  forecastType[0] = "location/city";
          *       // get a city with a numerous
          *           // https://api.meteo-concept.com/api/location/city?token=MON_TOKEN&insee=35238
@@ -319,6 +327,7 @@ public class RequestApi  {
          *       // get a list of cities with
          *           // https://api.meteo-concept.com/api/location/cities?token=MON_TOKEN&search=Rennes
          */
+        Uti.info("RequestApi","urlConception","");
          URL url = new URL(
                 "https",
                 "api.meteo-concept.com",

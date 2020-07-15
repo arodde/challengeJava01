@@ -19,9 +19,10 @@ public class TutorialJSONSimple {
 //        x2();
 //       createsCityJSONFile();
 //        displaysCityJSONFileContent();
-        String s = "xyztmp/tutoJsonSimple/city.json";
-        City myCity = displaysCityJSONStringContentFromFile(s);
-        System.out.println(myCity.toString());
+
+//        String s = "xyztmp/tutoJsonSimple/city.json";
+//        City myCity = displaysCityJSONStringContentFromJsonFile(s);
+//        System.out.println(myCity.toString());
     }
 
     //        x5();
@@ -199,11 +200,11 @@ public class TutorialJSONSimple {
             e.printStackTrace();
         }
     }
-    public City displaysCityJSONStringContentFromFile(String filePath){
+    public City displaysCityJSONStringContentFromJsonFile(String filePath){
         Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
         /**
          * uses a JSON String from a file and create an object
-         * para 1 :  :
+         * para 1 : String : path of the file
          * return value : a city
          */
 //        String s = "xyztmp/tutoJsonSimple/city.json";
@@ -214,6 +215,7 @@ public class TutorialJSONSimple {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         Object jsonObj = new JSONObject();
         City city = new City();
         try {
@@ -254,6 +256,68 @@ public class TutorialJSONSimple {
                 city.altitude = altitude;
 
         } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return city;
+    }
+    public City displaysCityJSONStringContentFromJsonString(String jsonString){
+        Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
+        /**
+         * uses a JSON String from a file and create an object
+         * para 1 : String : json string
+         * return value : a city
+         */
+//        String s = "xyztmp/tutoJsonSimple/city.json";
+        JSONParser parser = new JSONParser();
+        Reader reader = null;
+//        try {
+//            reader = new FileReader(jsonString);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+//        Object jsonObj = new JSONObject();
+        Object jsonObj = jsonString;
+        City city = new City();
+        try {
+            jsonObj = parser.parse(jsonString);
+
+//            jsonObj = parser.parse(reader);
+            jsonObj = parser.parse(jsonString);
+            JSONObject jsonObject = (JSONObject) jsonObj;
+            String insee = (String) jsonObject.get("insee");
+            String name = (String) jsonObject.get("name");
+            int cp = ((Long) jsonObject.get("cp")).intValue();
+            double latitude = (double) jsonObject.get("latitude");
+            double longitude = (double) jsonObject.get("longitude");
+            int altitude = ((Long) jsonObject.get("altitude")).intValue();
+            JSONArray cities = (JSONArray) jsonObject.get("cities");
+
+//            System.out.println("Code insee = " + insee);
+//            System.out.println("Nom = " + name);
+//            System.out.println("Code Postal = " + cp);
+//            System.out.println("Latitude " + latitude);
+//            System.out.println("Longitude = " + longitude);
+//            System.out.println("Altitude = " + altitude);
+//                @SuppressWarnings("unchecked")
+//                Iterator<String> it = cities.iterator();
+//
+//                while (it.hasNext()) {
+//                    System.out.println("City = " + it.next());
+//                }
+//            try {
+//                reader.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            city.insee = insee;
+            city.name = name;
+            city.cp = cp;
+            city.latitude = latitude;
+            city.longitude = longitude;
+            city.altitude = altitude;
+
+        } catch (ParseException /*| IOException */e) {
             e.printStackTrace();
         }
         return city;
