@@ -31,7 +31,7 @@ public class MaFen extends JFrame  {
     public String stringJSON ="";
     public RequestApi requestApi = new RequestApi();
  public JSONObject jsonObject=null;
-
+// todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
     public static void main(String[] args) {
         Uti.info("","","");
         MaFen mafen = new MaFen();
@@ -71,7 +71,7 @@ public class MaFen extends JFrame  {
         errorLabel.setBackground(Color.white);
         cityLabel.setText("Ville : ");
         bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
-        bottom.setBackground(Color.red);
+        bottom.setBackground(Color.pink);
         top.setPreferredSize(new Dimension(this.getWidth(), 50));
 //        interact.add(jbuttonAskWeatherInformations,BorderLayout.WEST);
         // give the response to internet connection test

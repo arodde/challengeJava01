@@ -46,7 +46,7 @@ public class RequestApi  {
     RequestApi(){
         Uti.info("RequestApi","RequestApi()","");
         initialisation();
-        x1a();
+        x1a("");
 //        x1b();
 //        x2();
     }
@@ -61,7 +61,7 @@ public class RequestApi  {
         forecastType[6] = "forecast-map-day";
         token = "3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
     }
-    public void x1a() {
+    public void x1a(String insee) {
         /**
          * aim: to do a request to the api and get a json object created
          * in the memory
@@ -81,7 +81,7 @@ public class RequestApi  {
         Uti.info("RequestApi","x1a","");
         City city=new City();
         JSONArray jsonArrayCity = null;
-        String insee="10300";
+//        String insee="36044";
         param=(insee!=""?"&insee="+insee:"");
         try {
             // GET
