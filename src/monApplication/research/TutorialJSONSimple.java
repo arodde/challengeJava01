@@ -19,10 +19,9 @@ public class TutorialJSONSimple {
 //        x2();
 //       createsCityJSONFile();
 //        displaysCityJSONFileContent();
-        City myCity = displaysCityJSONStringContent();
+        String s = "xyztmp/tutoJsonSimple/city.json";
+        City myCity = displaysCityJSONStringContentFromFile(s);
         System.out.println(myCity.toString());
-
-
     }
 
     //        x5();
@@ -124,16 +123,43 @@ public class TutorialJSONSimple {
         }
         System.out.print(city.toJSONString());
     }
-    public void displaysCityJSONFileContent(){
+    public void createsCityJSONFile(City city,String filePath){
+        /**
+         * creates a json file with couples of key and
+         * value created in this function
+         * para 1 : City : an object which is going put in memory
+         * para 2 : String : the address of the json file
+         */
+        Uti.info("TutorialJSONSimple","createsCityJSONFile","");
+        JSONObject jOCity = new JSONObject();
+        jOCity.put("insee",city.insee);
+        jOCity.put("latitude",city.latitude);
+        jOCity.put("longitude",city.longitude);
+        jOCity.put("name",city.name);
+        jOCity.put("cp",city.cp);
+        jOCity.put("altitude",city.altitude);
+        try {
+            FileWriter file = new FileWriter(filePath);
+            file.write(jOCity.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.print(jOCity.toJSONString());
+    }
+    public void displaysCityJSONFileContent(String filePath){
         Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
         /**
-         * displays each couple of key and value in an object
+         * displays each couple of key and value in an object of a string from a json file
+         * para 1 : String: the path's file
          */
 
         JSONParser parser = new JSONParser();
         Reader reader = null;
         try {
-            reader = new FileReader("xyztmp/tutoJsonSimple/city.json");
+//            reader = new FileReader("xyztmp/tutoJsonSimple/city.json");
+            reader = new FileReader(filePath);
             Object jsonObj = null;
             try {
                     jsonObj = parser.parse(reader);
@@ -173,16 +199,18 @@ public class TutorialJSONSimple {
             e.printStackTrace();
         }
     }
-    public City displaysCityJSONStringContent(/*Reader para*/){
+    public City displaysCityJSONStringContentFromFile(String filePath){
         Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
         /**
-         * displays each couple of key and value in an object
+         * uses a JSON String from a file and create an object
+         * para 1 :  :
+         * return value : a city
          */
-        String s = "xyztmp/tutoJsonSimple/city.json";
+//        String s = "xyztmp/tutoJsonSimple/city.json";
         JSONParser parser = new JSONParser();
         Reader reader = null;
         try {
-            reader = new FileReader(s);
+            reader = new FileReader(filePath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
