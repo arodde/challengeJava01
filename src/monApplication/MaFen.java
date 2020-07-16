@@ -35,7 +35,7 @@ public class MaFen extends JFrame  {
 //    public RequestApi requestApi = new RequestApi();
 //    public JSONObject jsonObject=null;
 
-    public TopPanel topPanel= new TopPanel();
+    public TopPanel topPanel;
     public JPanel bottom = new JPanel();
     public JPanel mainPanel = new JPanel();
     public JTable weatherJTable;
@@ -124,11 +124,13 @@ public class MaFen extends JFrame  {
 
 // add borderLayout in mainPanel
         BorderLayout borderLayout = new BorderLayout();
+        topPanel= new TopPanel();
         topPanel.cityWeatherInformations.addFocusListener(testConnection);
 //        jTextField.requestFocusInWindow();// get the focus on the textfield
         bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
         bottom.setBackground(Color.pink);
 //        interact.add(jbuttonAskWeatherInformations,BorderLayout.WEST);
+        topPanel.setPreferredSize(new Dimension(this.getWidth(), 50));
         mainPanel.setBackground(Color.white);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);

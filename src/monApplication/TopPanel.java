@@ -17,7 +17,7 @@ public class TopPanel extends JPanel {
     public JLabel errorLabel = new JLabel();
     public TopPanel(){
         Uti.info("TopPanel", "TopPanel","");
-        setPreferredSize(new Dimension(this.getWidth(), 50));/
+        setPreferredSize(new Dimension(this.getWidth(), 50));
         preparation();
         positionOnMaFen();
     }
@@ -30,7 +30,7 @@ public class TopPanel extends JPanel {
         errorLabel.setSize(new Dimension(200,60));
         errorLabel.setBackground(Color.white);
         cityLabel.setText("Ville : ");
-        setPreferredSize(new Dimension(this.getWidth(), 50));
+
     }
     public void positionOnMaFen(){
         Uti.info("TopPanel", "positionOnMaFen","");
