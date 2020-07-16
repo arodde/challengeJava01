@@ -8,12 +8,10 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 
 
-public class MaFen extends JFrame  {
+public class MaFen extends JFrame {
     // modification
     // author: AR
     // release 0.0.1
@@ -36,21 +34,21 @@ public class MaFen extends JFrame  {
 //    public JSONObject jsonObject=null;
 
     public TopPanel topPanel;
-    public JPanel bottom = new JPanel();
-    public JPanel mainPanel = new JPanel();
+    public JPanel bottom;
     public JTable weatherJTable;
+    public JPanel mainPanel = new JPanel();
     //    public JButton buttonAskWeatherInformations = new JButton();
 
     public TestConnection testConnection = new TestConnection();
     public URL testedUrl;
     public String request = "";
-    public String stringJSON ="";
+    public String stringJSON = "";
     public RequestApi requestApi = new RequestApi();
-    public JSONObject jsonObject=null;
+    public JSONObject jsonObject = null;
     // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
 
     public static void main(String[] args) {
-        Uti.info("","","");
+        Uti.info("", "", "");
         MaFen mafen = new MaFen();
 
 //        // serialization/deserialization test. It doesn't order with JSON
@@ -62,6 +60,7 @@ public class MaFen extends JFrame  {
             System.out.println(myCity.toString());
         */
     }
+
     // modification
     // author: AR
     // release 0.0.1
@@ -124,11 +123,12 @@ public class MaFen extends JFrame  {
 
 // add borderLayout in mainPanel
         BorderLayout borderLayout = new BorderLayout();
-        topPanel= new TopPanel();
+        topPanel = new TopPanel();
+        bottom = new JPanel();
+        bottom.setBackground(Color.pink);
         topPanel.cityWeatherInformations.addFocusListener(testConnection);
 //        jTextField.requestFocusInWindow();// get the focus on the textfield
         bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
-        bottom.setBackground(Color.pink);
 //        interact.add(jbuttonAskWeatherInformations,BorderLayout.WEST);
         topPanel.setPreferredSize(new Dimension(this.getWidth(), 50));
         mainPanel.setBackground(Color.white);
@@ -140,6 +140,7 @@ public class MaFen extends JFrame  {
         this.setVisible(true);
 //        testedUrl = new URL(requestApi.url);
     }
+
     public boolean testInternetConnection() {
         Uti.info("MaFen", "testInternetConnection", "");
         /**
@@ -150,7 +151,6 @@ public class MaFen extends JFrame  {
         // test connection
 //        String testedUrl = "https://openclassrooms.com/";
         String testedUrl = "https://api.meteo-concept.com/api/";
-//        boolean resultConnectivity = false;
         // modification
         // author: AR
         // release 0.0.1
@@ -179,23 +179,19 @@ public class MaFen extends JFrame  {
         try {
             URL url = new URL(testedUrl);
             URLConnection connection = url.openConnection();
-
             connection.connect();
             System.out.println("1");
             System.out.println("Vous êtes connectés à internet");
-//            errorLabel.setText("Vous êtes connectés à internet");
             topPanel.errorLabel.setText("Vous êtes connectés à internet");
             return true;
         } catch (MalformedURLException e) {
             System.out.println("2");
             System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-//            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
             topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
             return false;
         } catch (IOException e) {
             System.out.println("3");
             System.out.println("Une connexion à internet est requise");
-//             errorLabel.setText("Une connexion à internet est requise");
             topPanel.errorLabel.setText("Une connexion à internet est requise");
             return false;
         }
@@ -237,16 +233,17 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
          */
 
         Thread threadOfConnection;
+
         @Override
         public void focusGained(FocusEvent e) {
-            Uti.info("TestConnection","focusGained","");
+            Uti.info("TestConnection", "focusGained", "");
 
 
         }
 
         @Override
         public void focusLost(FocusEvent e) {
-            Uti.info("TestConnection","focusLost","");
+            Uti.info("TestConnection", "focusLost", "");
             /**
              * check if the internet's connection orders and if the url is real.
              */
@@ -277,11 +274,10 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
 //                    System.out.println("échec de connexion");
 //                }
 //            }
-            if(topPanel.cityWeatherInformations.getText()!=""|| topPanel.cityWeatherInformations != null)
-            {
+            if (topPanel.cityWeatherInformations.getText() != "" || topPanel.cityWeatherInformations != null) {
                 //      check internet connection
-                boolean connectionOk= false;
-                if(testInternetConnection()){
+                boolean connectionOk = false;
+                if (testInternetConnection()) {
                     //      if connection ok
                     //          create thread
                     //          stock recept data
@@ -290,16 +286,38 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
                     connectionOk = testInternetConnection();
                     request = testedUrl + "";
 //                    requestApi.url = testedUrl;
-                    threadOfConnection = new Thread(new CallAPI(requestApi,stringJSON)); // need url with town and token
+                    threadOfConnection = new Thread(new CallAPI(requestApi, stringJSON)); // need url with town and token
                     threadOfConnection.start();
-                }
-                else
-                {
+                } else {
                     System.out.println("échec de connexion");
                 }
             }
         }
 
-    }
+        // modification
+        // author: AR
+        // release 0.0.1
+        // date 20200716
+        public void tc() throws UnknownHostException, IOException {
+            try {
+                try {
+                    URL url = new URL("http://www.google.com");
+                    System.out.println(url.getHost());
+                    HttpURLConnection con = (HttpURLConnection) url
+                            .openConnection();
+                    con.connect();
+                    if (con.getResponseCode() == 200) {
+                        System.out.println("Connection established!!");
+                    }
+                } catch (Exception exception) {
+                    System.out.println("No Connection");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+
+        }
+
+    }
 }
