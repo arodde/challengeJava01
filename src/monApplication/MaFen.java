@@ -145,10 +145,10 @@ public class MaFen extends JFrame  {
          *  true if the internet connection orders. The url is correct OR NOT correct
          *  false if the internet connection doesn't orders.
          */
-        // test coestedUrl = "https://openclassrooms.com/";
+        // test connection
+//        String testedUrl = "https://openclassrooms.com/";
         String testedUrl = "https://api.meteo-concept.com/api/";
-//        boolean resultConnnection
-//////        String tnectivity = false;
+//        boolean resultConnectivity = false;
         // modification
         // author: AR
         // release 0.0.1
