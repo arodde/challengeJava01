@@ -21,7 +21,7 @@ public class RequestApi  {
     public String forecastType[] = new String[7];
     public String token;
     public String param;
-
+    public MaFen maFen;
     //    String request="";
 //    URL url=new URL();
 //    String token="";
@@ -39,14 +39,15 @@ public class RequestApi  {
 //        this.request = this.url+"/"+this.pathResources+"/"+this.token;
 //        System.out.println("requête : "+request);
 //    }
-    public static void main(String[] args){
-        Uti.info("RequestApi","main","");
-        RequestApi requestApi = new RequestApi();
-    }
-    RequestApi(){
+//    public static void main(String[] args){
+//        Uti.info("RequestApi","main","");
+//        RequestApi requestApi = new RequestApi(maFen);
+//    }
+    RequestApi(MaFen maFen){
         Uti.info("RequestApi","RequestApi()","");
+        this.maFen = maFen;
         initialisation();
-        x1a("");
+        x1a(this.maFen.topPanel.cityWeatherInformations.getText());
 //        x1b();
 //        x2();
     }
@@ -81,7 +82,7 @@ public class RequestApi  {
         Uti.info("RequestApi","x1a","");
         City city=new City();
         JSONArray jsonArrayCity = null;
-//        String insee="36044";
+//        insee="45000";
         param=(insee!=""?"&insee="+insee:"");
         try {
             // GET

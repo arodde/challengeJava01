@@ -6,7 +6,7 @@ import java.io.IOException;
         import java.net.URL;
         import java.net.UnknownHostException;
 
-public class TestConnection {
+public class TestConnectionExample {
     public static void main(String[] args) throws UnknownHostException,
             IOException {
         try {
