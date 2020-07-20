@@ -13,22 +13,22 @@ import java.awt.event.ActionListener;
 // date 20200716
 public class TopPanel extends JPanel {
     /**
-     * This panel is the part of frame with which the user interact for the application
+     * This panel is the part of frame with which the user interact for the application.
+     * the button serves to ask to api the information with the request
      */
     // modification
     // author: AR
     // release 0.0.2
-    // date 20200716
-            public MaFen maFen;
+    // date 20200720
+    public MaFen maFen;
     public JLabel cityLabel = new JLabel();
     public JTextField cityWeatherInformations= new JTextField();
     public JLabel errorLabel = new JLabel();
-    public ClickButton clickButton = new ClickButton();
+    public SendRequestListener sendRequestListener = new SendRequestListener();
+    public JButton askSearchButton;
     public RequestApi requestApi;
 
-    //    public JLabel cityLabel = new JLabel();
-//    public CityWeatherInformations cityWeatherInformations = new CityWeatherInformations();
-//    public JLabel errorLabel = new JLabel();
+
     public TopPanel(MaFen maFen){
         Uti.info("TopPanel", "TopPanel","");
         setPreferredSize(new Dimension(this.getWidth(), 50));
@@ -41,12 +41,12 @@ public class TopPanel extends JPanel {
         cityWeatherInformations.setSize(200,60);
         cityWeatherInformations.setBackground(Color.CYAN);
         cityWeatherInformations.setBackground(Color.white);
-        cityWeatherInformations.setText("                                ");
-        cityWeatherInformations.addActionListener(clickButton);
+        cityWeatherInformations.setText("                ");
         errorLabel.setSize(new Dimension(200,60));
         errorLabel.setBackground(Color.white);
         cityLabel.setText("Ville : ");
-
+        askSearchButton = new JButton("Demander informations");
+        askSearchButton.addActionListener(sendRequestListener);
 
     }
     public void positionOnMaFen(){
@@ -54,7 +54,8 @@ public class TopPanel extends JPanel {
         add(cityLabel, BorderLayout.WEST);
         add(cityWeatherInformations, BorderLayout.CENTER);
         add(errorLabel, BorderLayout.WEST);
-        setBackground(Color.gray);
+        add(askSearchButton,BorderLayout.SOUTH);
+        setBackground(Color.lightGray);
     }
     //    // modification
 //    // author: AR
@@ -208,12 +209,13 @@ public class TopPanel extends JPanel {
 //                e.printStackTrace();
 //            }
 //        }
-//    }
-    class ClickButton implements ActionListener {
+
+    class SendRequestListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Uti.info("ClickButton", "actionPerformed","");
+            Uti.info("SendRequestListener", "actionPerformed","");
+            cityWeatherInformations.getText().trim();
 
             requestApi = new RequestApi(maFen);
 
