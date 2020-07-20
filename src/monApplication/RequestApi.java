@@ -95,8 +95,8 @@ public class RequestApi  {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String antS =readStream(in);
 //                System.out.println("antS : "+antS);
-                String s =  antS.substring(8,(antS.length()-1));
-//                String s =  antS;
+//                String s =  antS.substring(8,(antS.length()-1));
+                String s =  antS;
                 System.out.println("s : "+s);
                 JSONParser jsonParser = new JSONParser();
                 ContainerFactory containerFactory = new ContainerFactory() {
@@ -120,10 +120,6 @@ public class RequestApi  {
 //                    String s = "xyztmp/tutoJsonSimple/city.json";
                     city = tutorialJSONSimple.displaysCityJSONStringContentFromJsonString(s);
                     System.out.println(city.toString());
-
-//                    TutorialJSONSimple tutorialJSONSimple = new TutorialJSONSimple();
-//                    Object object =  tutorialJSONSimple.displaysCityJSONStringContent(s);
-//                    city = (City) object;
                     System.out.println("type : "+ city.getClass());
                     System.out.println("My city is "+city.getName()+".");
 
@@ -184,10 +180,10 @@ public class RequestApi  {
             URL url = urlConception(forecastType[1],token,param);
 //            URL url = urlConception(forecastType[1],token,param);
             System.out.println(url);
-// get a city with a numerous
-// https://api.meteo-concept.com/api/location/city?token=MON_TOKEN&insee=35238
-// get a list of cities with
-// https://api.meteo-concept.com/api/location/cities?token=MON_TOKEN&search=Rennes
+            // get a city with a numerous
+            // https://api.meteo-concept.com/api/location/city?token=MON_TOKEN&insee=35238
+            // get a list of cities with
+            // https://api.meteo-concept.com/api/location/cities?token=MON_TOKEN&search=Rennes
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
@@ -238,6 +234,11 @@ public class RequestApi  {
         Uti.mess("sortie run");
     }
     private String readStream(InputStream is) throws IOException {
+        /**
+         * this function creates a string with a inputsSream got
+         * para 1 : InputStrim : stream
+         * returns : String
+         */
         Uti.info("RequestApi","readStream","");
         StringBuilder sb = new StringBuilder();
         BufferedReader r = new BufferedReader(new InputStreamReader(is),1000);

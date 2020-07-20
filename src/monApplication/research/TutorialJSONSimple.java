@@ -163,29 +163,29 @@ public class TutorialJSONSimple {
             reader = new FileReader(filePath);
             Object jsonObj = null;
             try {
-                    jsonObj = parser.parse(reader);
+                jsonObj = parser.parse(reader);
 
-                    JSONObject jsonObject = (JSONObject) jsonObj;
-                    String insee = (String) jsonObject.get("insee");
-                    System.out.println("Code insee = " + insee);
-                    String name = (String) jsonObject.get("name");
-                    System.out.println("Nom = " + name);
-                    int cp = ((Long) jsonObject.get("cp")).intValue();
-                    System.out.println("Code Postal = " + cp);
-                    double latitude = (double) jsonObject.get("latitude");
-                    System.out.println("Latitude " + latitude);
-                    double longitude = (double) jsonObject.get("longitude");
-                    System.out.println("Longitude = " + longitude);
-                    int altitude = ((Long) jsonObject.get("altitude")).intValue();
-                    System.out.println("Altitude = " + altitude);
-    //                JSONArray cities = (JSONArray) jsonObject.get("cities");
-    //
-    //                @SuppressWarnings("unchecked")
-    //                Iterator<String> it = cities.iterator();
-    //
-    //                while (it.hasNext()) {
-    //                    System.out.println("City = " + it.next());
-    //                }
+                JSONObject jsonObject = (JSONObject) jsonObj;
+                String insee = (String) jsonObject.get("insee");
+                System.out.println("Code insee = " + insee);
+                String name = (String) jsonObject.get("name");
+                System.out.println("Nom = " + name);
+                int cp = ((Long) jsonObject.get("cp")).intValue();
+                System.out.println("Code Postal = " + cp);
+                double latitude = (double) jsonObject.get("latitude");
+                System.out.println("Latitude " + latitude);
+                double longitude = (double) jsonObject.get("longitude");
+                System.out.println("Longitude = " + longitude);
+                int altitude = ((Long) jsonObject.get("altitude")).intValue();
+                System.out.println("Altitude = " + altitude);
+                //                JSONArray cities = (JSONArray) jsonObject.get("cities");
+                //
+                //                @SuppressWarnings("unchecked")
+                //                Iterator<String> it = cities.iterator();
+                //
+                //                while (it.hasNext()) {
+                //                    System.out.println("City = " + it.next());
+                //                }
                 try {
                     reader.close();
                 } catch (IOException e) {
@@ -248,12 +248,12 @@ public class TutorialJSONSimple {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-                city.insee = insee;
-                city.name = name;
-                city.cp = cp;
-                city.latitude = latitude;
-                city.longitude = longitude;
-                city.altitude = altitude;
+            city.insee = insee;
+            city.name = name;
+            city.cp = cp;
+            city.latitude = latitude;
+            city.longitude = longitude;
+            city.altitude = altitude;
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
@@ -276,22 +276,23 @@ public class TutorialJSONSimple {
 //            e.printStackTrace();
 //        }
 
-//        Object jsonObj = new JSONObject();
-        Object jsonObj = jsonString;
+        JSONObject jsonObjectReceived = new JSONObject();
+        JSONObject jsonObjectCity = new JSONObject();
         City city = new City();
         try {
-            jsonObj = parser.parse(jsonString);
+//            jsonObj = parser.parse(jsonString);
 
 //            jsonObj = parser.parse(reader);
-            jsonObj = parser.parse(jsonString);
-            JSONObject jsonObject = (JSONObject) jsonObj;
-            String insee = (String) jsonObject.get("insee");
-            String name = (String) jsonObject.get("name");
-            int cp = ((Long) jsonObject.get("cp")).intValue();
-            double latitude = (double) jsonObject.get("latitude");
-            double longitude = (double) jsonObject.get("longitude");
-            int altitude = ((Long) jsonObject.get("altitude")).intValue();
-            JSONArray cities = (JSONArray) jsonObject.get("cities");
+            jsonObjectReceived = (JSONObject) parser.parse(jsonString);
+            jsonObjectCity = (JSONObject) jsonObjectReceived.get("city");
+
+            String insee = (String) jsonObjectCity.get("insee");
+            String name = (String) jsonObjectCity.get("name");
+            int cp = ((Long) jsonObjectCity.get("cp")).intValue();
+            double latitude = (double) jsonObjectCity.get("latitude");
+            double longitude = (double) jsonObjectCity.get("longitude");
+            int altitude = ((Long) jsonObjectCity.get("altitude")).intValue();
+            JSONArray cities = (JSONArray) jsonObjectCity.get("cities");
 
 //            System.out.println("Code insee = " + insee);
 //            System.out.println("Nom = " + name);

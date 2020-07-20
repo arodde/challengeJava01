@@ -154,10 +154,39 @@ public class TopPanel extends JPanel {
 //            }
 //        }
 
+
         // modification
         // author: AR
         // release 0.0.1
         // date 20200716
+        public void displayServerResponse(int value){
+            switch (value) {
+                case 200:
+                    System.out.println("Ok connexion établie, connexion à l'api");
+                    break;
+                case 400:
+                    System.out.println("Nom de commune non trouvé dans la liste de communes de l'api");
+                    break;
+                case 401:
+                    System.out.println("Token absent ou invalide");
+                    break;
+                case 403:
+                    System.out.println("Nombre de requêtes autorisées par l'abonnement déjà atteint");
+                    break;
+                case 404:
+                    System.out.println("Url d'api inconnue");
+                    break;
+                case 500:
+                    System.out.println("Le serveur présente une erreur");
+                    break;
+                case 503:
+                    System.out.println("Service de l'api actuellement indisponible");
+                    break;
+                default:
+                    System.out.println("cas d'erreur non prêvu par l'api.");
+                    break;
+            }
+        }
         public void testInternetConnection() throws UnknownHostException, IOException {
             /**
              * function which confirms the internet connection
@@ -170,32 +199,8 @@ public class TopPanel extends JPanel {
                     System.out.println(url.getHost());
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.connect();
-                    switch (httpURLConnection.getResponseCode()) {
-                        case 200:
-                            System.out.println("Ok connexion établie, connexion à l'api");
-                            break;
-                        case 400:
-                            System.out.println("Nom de commune non trouvé dans la liste de communes de l'api");
-                            break;
-                        case 401:
-                            System.out.println("Token absent ou invalide");
-                            break;
-                        case 403:
-                            System.out.println("Nombre de requêtes autorisées par l'abonnement déjà atteint");
-                            break;
-                        case 404:
-                            System.out.println("Url d'api inconnue");
-                            break;
-                        case 500:
-                            System.out.println("Le serveur présente une erreur");
-                            break;
-                        case 503:
-                            System.out.println("Service de l'api actuellement indisponible");
-                            break;
-                        default:
-                            System.out.println("cas d'erreur non prêvu par l'api.");
-                            break;
-                    }
+                    displayServerResponse(httpURLConnection.getResponseCode());
+
 //                    if (con.getResponseCode() == 200) {
 //                        System.out.println("Connection established!!");
 //                    }
