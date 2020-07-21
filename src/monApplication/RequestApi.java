@@ -47,7 +47,7 @@ public class RequestApi  {
         Uti.info("RequestApi","RequestApi()","");
         this.maFen = maFen;
         initialisation();
-        x1a(this.maFen.topPanel.cityWeatherInformations.getText());
+        x1a(this.maFen.topPanel.cityWeatherInformations.getText().trim());
 //        x1b();
 //        x2();
     }
@@ -61,6 +61,7 @@ public class RequestApi  {
         forecastType[5] = "forecast-hour";
         forecastType[6] = "forecast-map-day";
         token = "3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
+//        token = "";
     }
     public void x1a(String insee) {
         /**
@@ -87,14 +88,14 @@ public class RequestApi  {
         try {
             // GET
             // this url is composed of the forecast type, the token, and the param
-            URL url = urlConception(forecastType[0],token,param);
+            URL url = urlConception(forecastType[0],token,param.trim());
             System.out.println(url);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String antS =readStream(in);
-//                System.out.println("antS : "+antS);
+                System.out.println("antS : "+antS);
 //                String s =  antS.substring(8,(antS.length()-1));
                 String s =  antS;
                 System.out.println("s : "+s);
@@ -161,7 +162,7 @@ public class RequestApi  {
         JSONArray jsonArrayCity = null;
         String forecastType[] = new String[7];
 //        String insee="77315";
-        String cityName="Tralala";
+        String cityName="";
 
 //        String param=(insee!=""?"&insee="+insee:"");
         String param=(cityName!=""?"&search="+cityName:"");
@@ -236,7 +237,7 @@ public class RequestApi  {
     private String readStream(InputStream is) throws IOException {
         /**
          * this function creates a string with a inputsSream got
-         * para 1 : InputStrim : stream
+         * para 1 : InputStream : stream
          * returns : String
          */
         Uti.info("RequestApi","readStream","");

@@ -8,7 +8,9 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 
 public class MaFen extends JFrame implements FocusListener {
@@ -37,14 +39,14 @@ public class MaFen extends JFrame implements FocusListener {
     public JPanel bottom;
     public JTable weatherJTable;
     public JPanel mainPanel = new JPanel();
-    public TestConnection testConnection = new TestConnection();
+//    public TestConnectionB testConnectionB = new TestConnectionB();
     //    public JButton buttonAskWeatherInformations = new JButton();
 
-//    public TestConnection testConnection = new TestConnection();
+        public TestConnection testConnection = new TestConnection();
     public URL testedUrl;
     public String request = "";
     public String stringJSON = "";
-//    public RequestApi requestApi ;
+    //    public RequestApi requestApi ;
     public JSONObject jsonObject = null;
     // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
 
@@ -233,14 +235,25 @@ public class MaFen extends JFrame implements FocusListener {
         }
     }
 
+
     @Override
     public void focusGained(FocusEvent e) {
+        Uti.info("MaFen","focusGained","");
+        try {
+            testConnection.preliminaryTestInternetConnection();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
 
     }
-
     @Override
     public void focusLost(FocusEvent e) {
-
+        Uti.info("MaFen","focusLost","");
+        try {
+            testConnection.preliminaryTestInternetConnection();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
 // todo  table
@@ -249,29 +262,29 @@ public class MaFen extends JFrame implements FocusListener {
 // todo  search request api
 // todo ?
 
-/*
-    public void CreateMyWeatherDataJtable(){
-Uti.info("MaFen","CreateMyWeatherDataJtable","");
+    /*
+        public void CreateMyWeatherDataJtable(){
+    Uti.info("MaFen","CreateMyWeatherDataJtable","");
 
 
-        // Data to be displayed in the JTable
-        String[][] data = {
-                { "a1", "b1", "c1" },
-                { "a2", "b2", "c2" }
-        };
+            // Data to be displayed in the JTable
+            String[][] data = {
+                    { "a1", "b1", "c1" },
+                    { "a2", "b2", "c2" }
+            };
 
-        // Column Names
-        String[] columnNames = { "a", "b", "c" };
+            // Column Names
+            String[] columnNames = { "a", "b", "c" };
 
-        // Initializing the JTable
-        weatherJTable = new JTable(data, columnNames);
-        weatherJTable.setBounds(30, 40, 200, 300);
+            // Initializing the JTable
+            weatherJTable = new JTable(data, columnNames);
+            weatherJTable.setBounds(30, 40, 200, 300);
 
-        // adding it to JScrollPane
-        JScrollPane sp = new JScrollPane(weatherJTable);
-        this.add(sp);
-    }
-*/
+            // adding it to JScrollPane
+            JScrollPane sp = new JScrollPane(weatherJTable);
+            this.add(sp);
+        }
+    */
     // modification
     // author: AR
     // release 0.0.2
@@ -400,27 +413,27 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
 // author: AR
 // release 0.0.2
 // date 20200716
-    class CityWeatherInformations extends JTextField implements FocusListener{
-        public TestConnection testConnection = new TestConnection();
-        @Override
-        public void focusGained(FocusEvent e) {
-            Uti.info("CityWeatherInformations","focusGained","");
-            try {
-                testConnection.testConnectionInternet();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-
-        }
-        @Override
-        public void focusLost(FocusEvent e) {
-            Uti.info("CityWeatherInformations","focusLost","");
-            try {
-                testConnection.testConnectionInternet();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
+    class CityWeatherInformations extends JTextField/* implements FocusListener*/{
+//        public TestConnectionB testConnectionB = new TestConnectionB();
+//        @Override
+//        public void focusGained(FocusEvent e) {
+//            Uti.info("CityWeatherInformations","focusGained","");
+//            try {
+//                testConnectionB.testConnectionInternet();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//
+//        }
+//        @Override
+//        public void focusLost(FocusEvent e) {
+//            Uti.info("CityWeatherInformations","focusLost","");
+//            try {
+//                testConnectionB.testConnectionInternet();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//        }
     }
 
 
