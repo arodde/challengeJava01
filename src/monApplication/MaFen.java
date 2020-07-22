@@ -46,14 +46,7 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("", "", "");
         MaFen mafen = new MaFen();
 
-//        // serialization/deserialization test. It doesn't order with JSON
-//             Uti.utilisationSerializationAndDeserializationFile();
-        /*
-            TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
-            String s = "xyztmp/tutoJsonSimple/city.json";
-            City myCity = tutorialJSONSimple.displaysCityJSONStringContentFromJsonFile(s);
-            System.out.println(myCity.toString());
-        */
+
     }
 
     // modification

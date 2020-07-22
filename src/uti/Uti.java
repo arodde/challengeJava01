@@ -8,6 +8,8 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public  class Uti{
 
@@ -168,5 +170,31 @@ public  class Uti{
             }
         }
         return map;
+    }
+
+    public static class RegularExpressionTest {
+        public static Boolean booleanTestRegex(String sPattern, String sMatcher,String trueMessage, String falseMessage){
+        /**
+           this method gives a message which show if the pattern matches with the proposed string or not
+         para 1 : String : the regular expression to  follow
+         para 2 : String : the tested expression
+         para 3 : String : the message if the sMatcher respects the sPattern
+         para 4 : String : the message if the sMatcher doesn't respect the sPattern
+         returnValue : Boolean :
+        */
+        Uti.info("RegularExpressionTest","booleanTestRegex","");
+            boolean isCorrectMatcherForPattern = false;
+            Pattern pattern = Pattern.compile(sPattern);
+            Matcher matcher = pattern.matcher(sMatcher);
+            isCorrectMatcherForPattern = matcher.matches();
+            if(isCorrectMatcherForPattern){
+                System.out.println("OK :)"+" ---> "+trueMessage );
+            }
+            else
+            {
+                System.out.println("KO :("+" ---> "+falseMessage);
+            }
+            return isCorrectMatcherForPattern;
+        }
     }
 }

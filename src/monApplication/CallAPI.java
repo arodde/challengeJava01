@@ -103,26 +103,29 @@ public class CallAPI /*implements Runnable */{
 //
 //    }
 
-        /*    public void connectionImplementation(URL url) throws IOException {
-                Uti.info("CallAPI","connectionImplementation","");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-        //            readStream(in);
-                    System.out.println(readStream(in));
-                } finally {
-                    urlConnection.disconnect();
-                }
-            }
 
-            private String readStream(InputStream is) throws IOException {
-                Uti.info("CallAPI","readStream","");
-                StringBuilder sb = new StringBuilder();
-                BufferedReader r = new BufferedReader(new InputStreamReader(is),1000);
-                for (String line = r.readLine(); line != null; line =r.readLine()){
-                    sb.append(line);
-                }
-                is.close();
-                return sb.toString();
-            }*/
 }
+//class CallAPI {
+//           /*    public void connectionImplementation(URL url) throws IOException {
+//                Uti.info("CallAPI","connectionImplementation","");
+//                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//                try {
+//                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+//        //            readStream(in);
+//                    System.out.println(readStream(in));
+//                } finally {
+//                    urlConnection.disconnect();
+//                }
+//            }
+//
+//            private String readStream(InputStream is) throws IOException {
+//                Uti.info("CallAPI","readStream","");
+//                StringBuilder sb = new StringBuilder();
+//                BufferedReader r = new BufferedReader(new InputStreamReader(is),1000);
+//                for (String line = r.readLine(); line != null; line =r.readLine()){
+//                    sb.append(line);
+//                }
+//                is.close();
+//                return sb.toString();
+//            }*/
+//}
