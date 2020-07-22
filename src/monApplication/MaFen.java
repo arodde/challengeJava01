@@ -1,6 +1,7 @@
 package monApplication;
 
-import org.json.JSONObject;
+
+import org.json.simple.JSONObject;
 import uti.Uti;
 
 import javax.swing.*;
@@ -8,9 +9,6 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 
 
 public class MaFen extends JFrame implements FocusListener {
@@ -37,16 +35,10 @@ public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
     public JPanel bottom;
-    public JTable weatherJTable;
+    public JTable cityWeatherInformationJTable;
     public JPanel mainPanel = new JPanel();
-//    public TestConnectionB testConnectionB = new TestConnectionB();
-    //    public JButton buttonAskWeatherInformations = new JButton();
 
-        public TestConnection testConnection = new TestConnection();
-    public URL testedUrl;
-    public String request = "";
-    public String stringJSON = "";
-    //    public RequestApi requestApi ;
+    public TestConnection testConnection = new TestConnection();
     public JSONObject jsonObject = null;
     // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
 
@@ -179,61 +171,61 @@ public class MaFen extends JFrame implements FocusListener {
         this.setVisible(true);
 //        testedUrl = new URL(requestApi.url);
     }
-    public boolean testInternetConnection() {
-        Uti.info("MaFen", "testInternetConnection", "");
-        /**
-         *  this function test if the client is connected to internet and return a boolean
-         *  true if the internet connection orders. The url is correct OR NOT correct
-         *  false if the internet connection doesn't orders.
-         */
-        // test connection
-//        String testedUrl = "https://openclassrooms.com/";
-        String testedUrl = "https://api.meteo-concept.com/api/";
-        // modification
-        // author: AR
-        // release 0.0.1
-        // date 20200716
+//    public boolean testInternetConnection() {
+//        Uti.info("MaFen", "testInternetConnection", "rrrr");
+//        /**
+//         *  this function test if the client is connected to internet and return a boolean
+//         *  true if the internet connection orders. The url is correct OR NOT correct
+//         *  false if the internet connection doesn't orders.
+//         */
+//        // test connection
+////        String testedUrl = "https://openclassrooms.com/";
+//        String testedUrl = "https://api.meteo-concept.com/api/";
+//        // modification
+//        // author: AR
+//        // release 0.0.1
+//        // date 20200716
+////        try {
+////            URL url = new URL(testedUrl);
+////            URLConnection connection = url.openConnection();
+////
+////            connection.connect();
+////            System.out.println("1");
+////            System.out.println("Vous êtes connectés à internet");
+////            errorLabel.setText("Vous êtes connectés à internet");
+////            return true;
+////        } catch (MalformedURLException e) {
+////            System.out.println("2");
+////            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+////            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+////            return false;
+////        } catch (IOException e) {
+////            System.out.println("3");
+////            System.out.println("Une connexion à internet est requise");
+////             errorLabel.setText("Une connexion à internet est requise");
+//
+////            return false;
+////        }
 //        try {
 //            URL url = new URL(testedUrl);
 //            URLConnection connection = url.openConnection();
-//
 //            connection.connect();
 //            System.out.println("1");
 //            System.out.println("Vous êtes connectés à internet");
-//            errorLabel.setText("Vous êtes connectés à internet");
+//            topPanel.errorLabel.setText("Vous êtes connectés à internet");
 //            return true;
 //        } catch (MalformedURLException e) {
 //            System.out.println("2");
 //            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-//            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+//            topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
 //            return false;
 //        } catch (IOException e) {
 //            System.out.println("3");
 //            System.out.println("Une connexion à internet est requise");
-//             errorLabel.setText("Une connexion à internet est requise");
-
+//            topPanel.errorLabel.setText("Une connexion à internet est requise");
 //            return false;
 //        }
-        try {
-            URL url = new URL(testedUrl);
-            URLConnection connection = url.openConnection();
-            connection.connect();
-            System.out.println("1");
-            System.out.println("Vous êtes connectés à internet");
-            topPanel.errorLabel.setText("Vous êtes connectés à internet");
-            return true;
-        } catch (MalformedURLException e) {
-            System.out.println("2");
-            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-            topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-            return false;
-        } catch (IOException e) {
-            System.out.println("3");
-            System.out.println("Une connexion à internet est requise");
-            topPanel.errorLabel.setText("Une connexion à internet est requise");
-            return false;
-        }
-    }
+//    }
 
 
     @Override

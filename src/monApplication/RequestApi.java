@@ -80,7 +80,7 @@ public class RequestApi  {
          * (example: the class city).
          *
          */
-        Uti.info("RequestApi","x1a","");
+        Uti.info("RequestApi","getCityWithInseeCode","");
         City city=new City();
         JSONArray jsonArrayCity = null;
 //        insee="45000";
@@ -139,7 +139,7 @@ public class RequestApi  {
         }
         Uti.mess("sortie run");
     }
-    public void x1b() {
+    public void x1b() { // futur functin's name "getCitiesWithCityName"
         /**
          * aim: to do a request to the api and get a json object created
          * in the memory
