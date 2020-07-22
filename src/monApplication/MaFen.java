@@ -413,28 +413,28 @@ public class MaFen extends JFrame implements FocusListener {
 // author: AR
 // release 0.0.2
 // date 20200716
-    class CityWeatherInformations extends JTextField/* implements FocusListener*/{
-//        public TestConnectionB testConnectionB = new TestConnectionB();
-//        @Override
-//        public void focusGained(FocusEvent e) {
-//            Uti.info("CityWeatherInformations","focusGained","");
-//            try {
-//                testConnectionB.testConnectionInternet();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//
-//        }
-//        @Override
-//        public void focusLost(FocusEvent e) {
-//            Uti.info("CityWeatherInformations","focusLost","");
-//            try {
-//                testConnectionB.testConnectionInternet();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
-    }
+//    class CityWeatherInformations extends JTextField/* implements FocusListener*/{
+////        public TestConnectionB testConnectionB = new TestConnectionB();
+////        @Override
+////        public void focusGained(FocusEvent e) {
+////            Uti.info("CityWeatherInformations","focusGained","");
+////            try {
+////                testConnectionB.testConnectionInternet();
+////            } catch (IOException ioException) {
+////                ioException.printStackTrace();
+////            }
+////
+////        }
+////        @Override
+////        public void focusLost(FocusEvent e) {
+////            Uti.info("CityWeatherInformations","focusLost","");
+////            try {
+////                testConnectionB.testConnectionInternet();
+////            } catch (IOException ioException) {
+////                ioException.printStackTrace();
+////            }
+////        }
+//    }
 
 
 }

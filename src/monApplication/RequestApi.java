@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class RequestApi  {
     public String forecastType[] = new String[7];
-    public String token;
+    private String token;
     public String param;
     public MaFen maFen;
     //    String request="";
@@ -47,7 +47,7 @@ public class RequestApi  {
         Uti.info("RequestApi","RequestApi()","");
         this.maFen = maFen;
         initialisation();
-        x1a(this.maFen.topPanel.cityWeatherInformations.getText().trim());
+        getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
 //        x1b();
 //        x2();
     }
@@ -63,7 +63,7 @@ public class RequestApi  {
         token = "3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
 //        token = "";
     }
-    public void x1a(String insee) {
+    public void getCityWithInseeCode(String insee) {
         /**
          * aim: to do a request to the api and get a json object created
          * in the memory
@@ -96,7 +96,6 @@ public class RequestApi  {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String antS =readStream(in);
                 System.out.println("antS : "+antS);
-//                String s =  antS.substring(8,(antS.length()-1));
                 String s =  antS;
                 System.out.println("s : "+s);
                 JSONParser jsonParser = new JSONParser();
@@ -249,6 +248,7 @@ public class RequestApi  {
         is.close();
         return sb.toString();
     }
+
 //    public void x2(){
 //        Uti.info("RequestApi","x2","");
 //        City city=new City();
