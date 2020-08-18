@@ -22,6 +22,8 @@ public class RequestApi  {
     private String token;
     public String param;
     public MaFen maFen;
+    public HttpURLConnection urlConnection;
+    public City city;
     //    String request="";
 //    URL url=new URL();
 //    String token="";
@@ -85,13 +87,11 @@ public class RequestApi  {
 //        insee="45000";
         param=(insee!=""?"&insee="+insee:"");
         try {
-           if(Uti.RegularExpressionTest.booleanTestRegex("\\d{5}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers"))
-           {
-               // todo faire une fonction spécifique pour cette élément Visibilité!!!
-            f1();
-
-
-           }
+            if(isFormatInseeCodeRespected(insee))
+            {
+                // todo faire une fonction spécifique pour cette élément Visibilité!!!
+                establishConnectionWithApi();
+            }
         }  catch (
                 MalformedURLException e) {
             e.printStackTrace();
@@ -100,18 +100,20 @@ public class RequestApi  {
             e.printStackTrace();
         }
     }
-    public void f1() throws IOException {
-
-        City city=new City();
+    public boolean isFormatInseeCodeRespected(String insee){
+        return Uti.RegularExpressionTest.booleanTestRegex("\\d{5}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers");
+    }
+    public void establishConnectionWithApi() throws IOException {
         URL url = urlConception(forecastType[0],token,param.trim());
         System.out.println(url);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection = (HttpURLConnection) url.openConnection();
+        receiveApiResponse();
+    }
+    public void receiveApiResponse() throws IOException {
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            String antS =readStream(in);
-            System.out.println("antS : "+antS);
-            String s =  antS;
-            System.out.println("s : "+s);
+            String characterStringObtained =readStream(in);
+            System.out.println("characterStringObtained : "+characterStringObtained);
             JSONParser jsonParser = new JSONParser();
             ContainerFactory containerFactory = new ContainerFactory() {
                 @Override
@@ -124,30 +126,31 @@ public class RequestApi  {
                 }
             };
             Map map= null;
-            try {
-                map = (Map) jsonParser.parse(s, containerFactory);
-                System.out.println("city : " +  map.get("city"));
-                JSONParser jsonParser1 = new JSONParser();
-                System.out.println(s);
+            extractJsonObjectFromReceiveResponse( characterStringObtained, containerFactory,jsonParser,map);
 
-                TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
-//                    String s = "xyztmp/tutoJsonSimple/city.json";
-                city = tutorialJSONSimple.displaysCityJSONStringContentFromJsonString(s);
-                System.out.println(city.toString());
-                System.out.println("type : "+ city.getClass());
-                System.out.println("My city is "+city.getName()+".");
-
-            } catch(ParseException pe) {
-                System.out.println("position: " + pe.getPosition());
-                System.out.println(pe);
-            }
         } finally {
             urlConnection.disconnect();
         }
-
     }
-
-    public void x1b() { // futur function's name "getCitiesWithCityName"
+    public void extractJsonObjectFromReceiveResponse( String characterStringObtained, ContainerFactory containerFactory, JSONParser jsonParser, Map map){
+        try {
+            city=new City();
+            map = (Map) jsonParser.parse(characterStringObtained, containerFactory);
+            System.out.println("city : " +  map.get("city"));
+            JSONParser jsonParser1 = new JSONParser();
+            System.out.println(characterStringObtained);
+            TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
+//                    String s = "xyztmp/tutoJsonSimple/city.json";
+            city = tutorialJSONSimple.displaysCityJSONStringContentFromJsonString(characterStringObtained);
+            System.out.println(city.toString());
+            System.out.println("type : "+ city.getClass());
+            System.out.println("My city is "+city.getName()+".");
+        } catch(ParseException pe) {
+            System.out.println("position: " + pe.getPosition());
+            System.out.println(pe);
+        }
+    }
+    public void x1b() { // future function's name "getCitiesWithCityName"
         /**
          * aim: to do a request to the api and get a json object created
          * in the memory
@@ -173,15 +176,7 @@ public class RequestApi  {
 
 //        String param=(insee!=""?"&insee="+insee:"");
         String param=(cityName!=""?"&search="+cityName:"");
-        String token;
-        forecastType[0] = "location/city";
-        forecastType[1] = "location/cities";
-        forecastType[2] = "forecast/nextHours";
-        forecastType[3] = "forecast/daily";
-        forecastType[4] = "forecast-period";
-        forecastType[5] = "forecast-hour";
-        forecastType[6] = "forecast-map-day";
-        token = "3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
+
         try {
             // GET
             // this url is composed of the forecast type, the token, and the param
@@ -257,7 +252,7 @@ public class RequestApi  {
         return sb.toString();
     }
 
-//    public void x2(){
+    //    public void x2(){
 //        Uti.info("RequestApi","x2","");
 //        City city=new City();
 //        String forecastType[] = new String[6];
@@ -339,7 +334,7 @@ public class RequestApi  {
          *           // https://api.meteo-concept.com/api/location/cities?token=MON_TOKEN&search=Rennes
          */
         Uti.info("RequestApi","urlConception","");
-         URL url = new URL(
+        URL url = new URL(
                 "https",
                 "api.meteo-concept.com",
                 "/api/" + forecastType + "?" +
