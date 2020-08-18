@@ -169,6 +169,7 @@ public class MaFen extends JFrame implements FocusListener {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+
     }
     public void topPanelSetting(){
         Uti.info("MaFen", "topPanelSetting", "");
@@ -184,7 +185,6 @@ public class MaFen extends JFrame implements FocusListener {
     }
     public void mainPanelLayout(){
         Uti.info("MaFen", "mainPanelLayout", "");
-        BorderLayout borderLayout = new BorderLayout();
         mainPanel.setBackground(Color.white);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
@@ -255,14 +255,15 @@ public class MaFen extends JFrame implements FocusListener {
     }
 
     @Override
-    public void focusGained(FocusEvent e) {
+    public void focusGained(FocusEvent focusEvent) {
 
     }
 
     @Override
-    public void focusLost(FocusEvent e) {
+    public void focusLost(FocusEvent focusEvent) {
 
     }
+
 
 // todo  table
 // todo  request to api
@@ -426,21 +427,19 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
         @Override
         public void focusGained(FocusEvent e) {
             Uti.info("CityWeatherInformations","focusGained","");
-            try {
-                testConnection.testInternetConnection();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-
+            checkConnection();
         }
         @Override
         public void focusLost(FocusEvent e) {
             Uti.info("CityWeatherInformations","focusLost","");
-            try {
-                testConnection.testInternetConnection();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+           checkConnection();
         }
+       public void checkConnection(){
+           try {
+               testConnection.testInternetConnection();
+           } catch (IOException ioException) {
+               ioException.printStackTrace();
+           }
+       }
     }
 }

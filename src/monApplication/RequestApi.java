@@ -96,8 +96,7 @@ public class RequestApi  {
         }  catch (
                 MalformedURLException e) {
             e.printStackTrace();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
