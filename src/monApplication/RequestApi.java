@@ -147,7 +147,7 @@ public class RequestApi  {
 
     }
 
-    public void x1b() { // futur functin's name "getCitiesWithCityName"
+    public void x1b() { // futur function's name "getCitiesWithCityName"
         /**
          * aim: to do a request to the api and get a json object created
          * in the memory
@@ -346,5 +346,4 @@ public class RequestApi  {
                         "token=" + token+param);
         return url;
     }
-
 }
