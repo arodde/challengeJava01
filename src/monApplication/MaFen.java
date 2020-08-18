@@ -159,12 +159,8 @@ public class MaFen extends JFrame implements FocusListener {
         topPanelSetting();
         bottomSetting();
         mainPanelLayout();
-
-//        jbuttonAskWeatherInformations.addActionListener(askApi);
-        // display the window
         this.setContentPane(mainPanel);
         this.setVisible(true);
-//        testedUrl = new URL(requestApi.url);
     }
     public void frameInitialization(){
         Uti.info("MaFen", "frameInitialization", "");
@@ -230,23 +226,32 @@ public class MaFen extends JFrame implements FocusListener {
 //        }
         try {
             URL url = new URL(testedUrl);
-            URLConnection connection = url.openConnection();
-            connection.connect();
-            System.out.println("1");
-            System.out.println("Vous êtes connectés à internet");
-            topPanel.errorLabel.setText("Vous êtes connectés à internet");
-            return true;
+           apiFound(url);
+           return true;
         } catch (MalformedURLException e) {
-            System.out.println("2");
-            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-            topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+            apiNotFound();
             return false;
         } catch (IOException e) {
-            System.out.println("3");
-            System.out.println("Une connexion à internet est requise");
-            topPanel.errorLabel.setText("Une connexion à internet est requise");
+            missingInternetConnection();
             return false;
         }
+    }
+    public void apiFound(URL url) throws IOException {
+        URLConnection connection = url.openConnection();
+        connection.connect();
+        System.out.println("1");
+        System.out.println("Vous êtes connectés à internet");
+        topPanel.errorLabel.setText("Vous êtes connectés à internet");
+    }
+    public void apiNotFound(){
+        System.out.println("2");
+        System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+        topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+    }
+    public void missingInternetConnection(){
+        System.out.println("3");
+        System.out.println("Une connexion à internet est requise");
+        topPanel.errorLabel.setText("Une connexion à internet est requise");
     }
 
     @Override
