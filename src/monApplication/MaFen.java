@@ -1,6 +1,5 @@
 package monApplication;
 
-
 import org.json.simple.JSONObject;
 import uti.Uti;
 
@@ -9,6 +8,9 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 
 public class MaFen extends JFrame implements FocusListener {
@@ -35,10 +37,16 @@ public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
     public JPanel bottom;
-    public JTable cityWeatherInformationJTable;
+    public JTable weatherJTable;
     public JPanel mainPanel = new JPanel();
-
     public TestConnection testConnection = new TestConnection();
+    //    public JButton buttonAskWeatherInformations = new JButton();
+
+//    public TestConnection testConnection = new TestConnection();
+    public URL testedUrl;
+    public String request = "";
+    public String stringJSON = "";
+//    public RequestApi requestApi ;
     public JSONObject jsonObject = null;
     // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
 
@@ -46,7 +54,14 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("", "", "");
         MaFen mafen = new MaFen();
 
-
+//        // serialization/deserialization test. It doesn't order with JSON
+//             Uti.utilisationSerializationAndDeserializationFile();
+        /*
+            TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
+            String s = "xyztmp/tutoJsonSimple/city.json";
+            City myCity = tutorialJSONSimple.displaysCityJSONStringContentFromJsonFile(s);
+            System.out.println(myCity.toString());
+        */
     }
 
     // modification
@@ -138,107 +153,110 @@ public class MaFen extends JFrame implements FocusListener {
          * constructor
          * add fields in window
          */
-        this.setTitle("Affichage Météo par ville");
-        this.setSize(600, 600);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        frameInitialization();
 
 // add borderLayout in mainPanel
-        BorderLayout borderLayout = new BorderLayout();
-        topPanel = new TopPanel(this);
-//        requestApi = new RequestApi(this);
-        bottom = new JPanel();
-        bottom.setBackground(Color.pink);
-        topPanel.cityWeatherInformations.addFocusListener(this);
-//        jTextField.requestFocusInWindow();// get the focus on the textfield
-        bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
-//        interact.add(jbuttonAskWeatherInformations,BorderLayout.WEST);
-        topPanel.setPreferredSize(new Dimension(this.getWidth(), 50));
-        mainPanel.setBackground(Color.white);
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
+        topPanelSetting();
+        bottomSetting();
+        mainPanelLayout();
+
 //        jbuttonAskWeatherInformations.addActionListener(askApi);
         // display the window
         this.setContentPane(mainPanel);
         this.setVisible(true);
 //        testedUrl = new URL(requestApi.url);
     }
-//    public boolean testInternetConnection() {
-//        Uti.info("MaFen", "testInternetConnection", "rrrr");
-//        /**
-//         *  this function test if the client is connected to internet and return a boolean
-//         *  true if the internet connection orders. The url is correct OR NOT correct
-//         *  false if the internet connection doesn't orders.
-//         */
-//        // test connection
-////        String testedUrl = "https://openclassrooms.com/";
-//        String testedUrl = "https://api.meteo-concept.com/api/";
-//        // modification
-//        // author: AR
-//        // release 0.0.1
-//        // date 20200716
-////        try {
-////            URL url = new URL(testedUrl);
-////            URLConnection connection = url.openConnection();
-////
-////            connection.connect();
-////            System.out.println("1");
-////            System.out.println("Vous êtes connectés à internet");
-////            errorLabel.setText("Vous êtes connectés à internet");
-////            return true;
-////        } catch (MalformedURLException e) {
-////            System.out.println("2");
-////            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-////            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-////            return false;
-////        } catch (IOException e) {
-////            System.out.println("3");
-////            System.out.println("Une connexion à internet est requise");
-////             errorLabel.setText("Une connexion à internet est requise");
-//
-////            return false;
-////        }
+    public void frameInitialization(){
+        Uti.info("MaFen", "frameInitialization", "");
+        this.setTitle("Affichage Météo par ville");
+        this.setSize(600, 600);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+    }
+    public void topPanelSetting(){
+        Uti.info("MaFen", "topPanelSetting", "");
+        topPanel = new TopPanel(this);
+        topPanel.cityWeatherInformations.addFocusListener(this);
+        topPanel.setPreferredSize(new Dimension(this.getWidth(), 50));
+    }
+    public void bottomSetting(){
+        Uti.info("MaFen", "bottomSetting", "");
+        bottom = new JPanel();
+        bottom.setBackground(Color.pink);
+        bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
+    }
+    public void mainPanelLayout(){
+        Uti.info("MaFen", "mainPanelLayout", "");
+        BorderLayout borderLayout = new BorderLayout();
+        mainPanel.setBackground(Color.white);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
+    }
+    public boolean testInternetConnection() {
+        Uti.info("MaFen", "testInternetConnection", "");
+        /**
+         *  this function test if the client is connected to internet and return a boolean
+         *  true if the internet connection orders. The url is correct OR NOT correct
+         *  false if the internet connection doesn't orders.
+         */
+        // test connection
+//        String testedUrl = "https://openclassrooms.com/";
+        String testedUrl = "https://api.meteo-concept.com/api/";
+        // modification
+        // author: AR
+        // release 0.0.1
+        // date 20200716
 //        try {
 //            URL url = new URL(testedUrl);
 //            URLConnection connection = url.openConnection();
+//
 //            connection.connect();
 //            System.out.println("1");
 //            System.out.println("Vous êtes connectés à internet");
-//            topPanel.errorLabel.setText("Vous êtes connectés à internet");
+//            errorLabel.setText("Vous êtes connectés à internet");
 //            return true;
 //        } catch (MalformedURLException e) {
 //            System.out.println("2");
 //            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-//            topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+//            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
 //            return false;
 //        } catch (IOException e) {
 //            System.out.println("3");
 //            System.out.println("Une connexion à internet est requise");
-//            topPanel.errorLabel.setText("Une connexion à internet est requise");
+//             errorLabel.setText("Une connexion à internet est requise");
+
 //            return false;
 //        }
-//    }
-
+        try {
+            URL url = new URL(testedUrl);
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            System.out.println("1");
+            System.out.println("Vous êtes connectés à internet");
+            topPanel.errorLabel.setText("Vous êtes connectés à internet");
+            return true;
+        } catch (MalformedURLException e) {
+            System.out.println("2");
+            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+            topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
+            return false;
+        } catch (IOException e) {
+            System.out.println("3");
+            System.out.println("Une connexion à internet est requise");
+            topPanel.errorLabel.setText("Une connexion à internet est requise");
+            return false;
+        }
+    }
 
     @Override
     public void focusGained(FocusEvent e) {
-        Uti.info("MaFen","focusGained","");
-        try {
-            testConnection.preliminaryTestInternetConnection();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
 
     }
+
     @Override
     public void focusLost(FocusEvent e) {
-        Uti.info("MaFen","focusLost","");
-        try {
-            testConnection.preliminaryTestInternetConnection();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+
     }
 
 // todo  table
@@ -247,29 +265,29 @@ public class MaFen extends JFrame implements FocusListener {
 // todo  search request api
 // todo ?
 
-    /*
-        public void CreateMyWeatherDataJtable(){
-    Uti.info("MaFen","CreateMyWeatherDataJtable","");
+/*
+    public void CreateMyWeatherDataJtable(){
+Uti.info("MaFen","CreateMyWeatherDataJtable","");
 
 
-            // Data to be displayed in the JTable
-            String[][] data = {
-                    { "a1", "b1", "c1" },
-                    { "a2", "b2", "c2" }
-            };
+        // Data to be displayed in the JTable
+        String[][] data = {
+                { "a1", "b1", "c1" },
+                { "a2", "b2", "c2" }
+        };
 
-            // Column Names
-            String[] columnNames = { "a", "b", "c" };
+        // Column Names
+        String[] columnNames = { "a", "b", "c" };
 
-            // Initializing the JTable
-            weatherJTable = new JTable(data, columnNames);
-            weatherJTable.setBounds(30, 40, 200, 300);
+        // Initializing the JTable
+        weatherJTable = new JTable(data, columnNames);
+        weatherJTable.setBounds(30, 40, 200, 300);
 
-            // adding it to JScrollPane
-            JScrollPane sp = new JScrollPane(weatherJTable);
-            this.add(sp);
-        }
-    */
+        // adding it to JScrollPane
+        JScrollPane sp = new JScrollPane(weatherJTable);
+        this.add(sp);
+    }
+*/
     // modification
     // author: AR
     // release 0.0.2
@@ -398,28 +416,26 @@ public class MaFen extends JFrame implements FocusListener {
 // author: AR
 // release 0.0.2
 // date 20200716
-//    class CityWeatherInformations extends JTextField/* implements FocusListener*/{
-////        public TestConnectionB testConnectionB = new TestConnectionB();
-////        @Override
-////        public void focusGained(FocusEvent e) {
-////            Uti.info("CityWeatherInformations","focusGained","");
-////            try {
-////                testConnectionB.testConnectionInternet();
-////            } catch (IOException ioException) {
-////                ioException.printStackTrace();
-////            }
-////
-////        }
-////        @Override
-////        public void focusLost(FocusEvent e) {
-////            Uti.info("CityWeatherInformations","focusLost","");
-////            try {
-////                testConnectionB.testConnectionInternet();
-////            } catch (IOException ioException) {
-////                ioException.printStackTrace();
-////            }
-////        }
-//    }
+    class CityWeatherInformations extends JTextField implements FocusListener{
+        public TestConnection testConnection = new TestConnection();
+        @Override
+        public void focusGained(FocusEvent e) {
+            Uti.info("CityWeatherInformations","focusGained","");
+            try {
+                testConnection.testInternetConnection();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
 
-
+        }
+        @Override
+        public void focusLost(FocusEvent e) {
+            Uti.info("CityWeatherInformations","focusLost","");
+            try {
+                testConnection.testInternetConnection();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
 }
