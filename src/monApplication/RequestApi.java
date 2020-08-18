@@ -49,6 +49,7 @@ public class RequestApi  {
         Uti.info("RequestApi","RequestApi()","");
         this.maFen = maFen;
         initialisation();
+        // todo function analyse input and use the appropriate request
         getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
 //        x1b();
 //        x2();
@@ -104,51 +105,55 @@ public class RequestApi  {
         return Uti.RegularExpressionTest.booleanTestRegex("\\d{5}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers");
     }
     public void establishConnectionWithApi() throws IOException {
+        Uti.info("RequestApi","establishConnectionWithApi","");
         URL url = urlConception(forecastType[0],token,param.trim());
         System.out.println(url);
         urlConnection = (HttpURLConnection) url.openConnection();
-        receiveApiResponse();
-    }
-    public void receiveApiResponse() throws IOException {
         try {
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            String characterStringObtained =readStream(in);
-            System.out.println("characterStringObtained : "+characterStringObtained);
-            JSONParser jsonParser = new JSONParser();
-            ContainerFactory containerFactory = new ContainerFactory() {
-                @Override
-                public Map createObjectContainer() {
-                    return new LinkedHashMap<>();
-                }
-                @Override
-                public List creatArrayContainer() {
-                    return new LinkedList<>();
-                }
-            };
-            Map map= null;
-            extractJsonObjectFromReceiveResponse( characterStringObtained, containerFactory,jsonParser,map);
-
+            receiveApiResponse();
+        } catch (ParseException e) {
+            System.out.println("la réponse de l'API ne permet pas de trouver une commune correspondant au code insee saisi.");
+            e.printStackTrace();
         } finally {
             urlConnection.disconnect();
         }
     }
-    public void extractJsonObjectFromReceiveResponse( String characterStringObtained, ContainerFactory containerFactory, JSONParser jsonParser, Map map){
-        try {
-            city=new City();
-            map = (Map) jsonParser.parse(characterStringObtained, containerFactory);
-            System.out.println("city : " +  map.get("city"));
-            JSONParser jsonParser1 = new JSONParser();
-            System.out.println(characterStringObtained);
-            TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
+    public void receiveApiResponse() throws IOException, ParseException {
+        Uti.info("RequestApi","receiveApiResponse","");
+        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+        String characterStringObtained =readStream(in);
+        System.out.println("characterStringObtained : "+characterStringObtained);
+        JSONParser jsonParser = new JSONParser();
+        city =extractJsonObjectFromReceiveResponse( characterStringObtained, jsonParser);
+        cityConsoleDescription();
+    }
+    public City extractJsonObjectFromReceiveResponse( String characterStringObtained,  JSONParser jsonParser) throws ParseException {
+
+        Uti.info("RequestApi","extractJsonObjectFromReceiveResponse","");
+        city=new City();
+        ContainerFactory containerFactory = new ContainerFactory() {
+            @Override
+            public Map createObjectContainer() {
+                return new LinkedHashMap<>();
+            }
+            @Override
+            public List creatArrayContainer() {
+                return new LinkedList<>();
+            }
+        };
+        Map  map = (Map) jsonParser.parse(characterStringObtained, containerFactory);
+        System.out.println("city : " +  map.get("city"));
+        System.out.println(characterStringObtained);
+        TutorialJSONSimple tutorialJSONSimple= new TutorialJSONSimple();
 //                    String s = "xyztmp/tutoJsonSimple/city.json";
-            city = tutorialJSONSimple.displaysCityJSONStringContentFromJsonString(characterStringObtained);
-            System.out.println(city.toString());
-            System.out.println("type : "+ city.getClass());
-            System.out.println("My city is "+city.getName()+".");
-        } catch(ParseException pe) {
-            System.out.println("position: " + pe.getPosition());
-            System.out.println(pe);
-        }
+        city = tutorialJSONSimple.displaysCityJSONStringContentFromJsonString(characterStringObtained);
+        return city;
+    }
+    public void cityConsoleDescription(){
+        Uti.info("RequestApi","cityConsoleDescription","");
+        System.out.println(city.toString());
+//        System.out.println("type : "+ city.getClass());
+        System.out.println("My city is "+city.getName()+".");
     }
     public void x1b() { // future function's name "getCitiesWithCityName"
         /**
