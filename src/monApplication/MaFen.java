@@ -1,6 +1,10 @@
 package monApplication;
 
+import monApplication.classApi.City;
+import monApplication.item_answer.ItemAnswerCity;
 import org.json.simple.JSONObject;
+import uti.ManageWindowPositionInScreen;
+import uti.UnpossibleMeasureException;
 import uti.Uti;
 
 import javax.swing.*;
@@ -11,6 +15,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 
 public class MaFen extends JFrame implements FocusListener {
@@ -37,17 +42,21 @@ public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
     public JPanel bottom;
-    public JTable weatherJTable;
+    //    public City city;
+    public monApplication.CityWeatherInformations cityWeatherInformations;
     public JPanel mainPanel = new JPanel();
+    public BorderLayout borderLayout= new BorderLayout();
     public TestConnection testConnection = new TestConnection();
     //    public JButton buttonAskWeatherInformations = new JButton();
 
-//    public TestConnection testConnection = new TestConnection();
+    //    public TestConnection testConnection = new TestConnection();
     public URL testedUrl;
     public String request = "";
     public String stringJSON = "";
-//    public RequestApi requestApi ;
+    //    public RequestApi requestApi ;
     public JSONObject jsonObject = null;
+    public ItemAnswerCity itemAnswerCity;
+    public ArrayList<City> cities = new ArrayList<City>();
     // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
 
     public static void main(String[] args) {
@@ -165,11 +174,21 @@ public class MaFen extends JFrame implements FocusListener {
     public void frameInitialization(){
         Uti.info("MaFen", "frameInitialization", "");
         this.setTitle("Affichage Météo par ville");
-        this.setSize(600, 600);
-        this.setResizable(false);
+        this.setSize(900, 900);
+        this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-
+        postionFrameInScreen(75,75);
+    }
+    private void postionFrameInScreen(int posX,int posY){
+        try {
+            ManageWindowPositionInScreen manageWindowPositionInScreen = new ManageWindowPositionInScreen(this,posX, posY);
+        } catch (UnpossibleMeasureException e) {
+            e.printStackTrace();
+            ManageWindowPositionInScreen.informations(
+                    Toolkit.getDefaultToolkit().getScreenSize().width,
+                    Toolkit.getDefaultToolkit().getScreenSize().height
+            );
+        }
     }
     public void topPanelSetting(){
         Uti.info("MaFen", "topPanelSetting", "");
@@ -181,7 +200,35 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "bottomSetting", "");
         bottom = new JPanel();
         bottom.setBackground(Color.pink);
-        bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - 50));
+//        adjustBottomSize();
+        bottom.setLayout(borderLayout);
+    }
+    public void bottomAnswer(){
+        Uti.info("MaFen", "bottomAnswer", "");
+//        adjustBottomSize();
+        bottom.setBackground(Color.cyan);
+        updateBottom();
+
+    }
+    public void updateBottom(){
+        Uti.info("MaFen", "updateBottom", "");
+        if(cities.size()!=0){
+            createItemCities();
+        }
+    }
+    public void createItemCities(){
+        Uti.info("MaFen", "createItemCities", "");
+        for (int i = 0; i< cities.size(); i++ ){
+            ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
+
+//                itemAnswerCity.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable));
+            bottom.add(    new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable),BorderLayout.SOUTH);
+//                bottom.add(itemAnswerCity);
+        }
+    }
+    public void adjustBottomSize(){
+        Uti.info("MaFen", "adjustBottomSize", "");
+        bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-90));
     }
     public void mainPanelLayout(){
         Uti.info("MaFen", "mainPanelLayout", "");
@@ -189,6 +236,7 @@ public class MaFen extends JFrame implements FocusListener {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
     }
+
     public boolean testInternetConnection() {
         Uti.info("MaFen", "testInternetConnection", "");
         /**
@@ -226,8 +274,8 @@ public class MaFen extends JFrame implements FocusListener {
 //        }
         try {
             URL url = new URL(testedUrl);
-           apiFound(url);
-           return true;
+            apiFound(url);
+            return true;
         } catch (MalformedURLException e) {
             apiNotFound();
             return false;
@@ -271,29 +319,29 @@ public class MaFen extends JFrame implements FocusListener {
 // todo  search request api
 // todo ?
 
-/*
-    public void CreateMyWeatherDataJtable(){
-Uti.info("MaFen","CreateMyWeatherDataJtable","");
+    /*
+        public void CreateMyWeatherDataJtable(){
+    Uti.info("MaFen","CreateMyWeatherDataJtable","");
 
 
-        // Data to be displayed in the JTable
-        String[][] data = {
-                { "a1", "b1", "c1" },
-                { "a2", "b2", "c2" }
-        };
+            // Data to be displayed in the JTable
+            String[][] data = {
+                    { "a1", "b1", "c1" },
+                    { "a2", "b2", "c2" }
+            };
 
-        // Column Names
-        String[] columnNames = { "a", "b", "c" };
+            // Column Names
+            String[] columnNames = { "a", "b", "c" };
 
-        // Initializing the JTable
-        weatherJTable = new JTable(data, columnNames);
-        weatherJTable.setBounds(30, 40, 200, 300);
+            // Initializing the JTable
+            weatherJTable = new JTable(data, columnNames);
+            weatherJTable.setBounds(30, 40, 200, 300);
 
-        // adding it to JScrollPane
-        JScrollPane sp = new JScrollPane(weatherJTable);
-        this.add(sp);
-    }
-*/
+            // adding it to JScrollPane
+            JScrollPane sp = new JScrollPane(weatherJTable);
+            this.add(sp);
+        }
+    */
     // modification
     // author: AR
     // release 0.0.2
@@ -422,7 +470,7 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
 // author: AR
 // release 0.0.2
 // date 20200716
-    class CityWeatherInformations extends JTextField implements FocusListener{
+    class CityWeatherInformationsJtextFieldFocusListener extends JTextField implements FocusListener{
         public TestConnection testConnection = new TestConnection();
         @Override
         public void focusGained(FocusEvent e) {
@@ -432,14 +480,14 @@ Uti.info("MaFen","CreateMyWeatherDataJtable","");
         @Override
         public void focusLost(FocusEvent e) {
             Uti.info("CityWeatherInformations","focusLost","");
-           checkConnection();
+            checkConnection();
         }
-       public void checkConnection(){
-           try {
-               testConnection.testInternetConnection();
-           } catch (IOException ioException) {
-               ioException.printStackTrace();
-           }
-       }
+        public void checkConnection(){
+            try {
+                testConnection.testInternetConnection();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
 }
