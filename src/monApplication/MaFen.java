@@ -217,17 +217,20 @@ public class MaFen extends JFrame implements FocusListener {
     }
     public void updateBottom() throws CityNullException {
         Uti.info("MaFen", "updateBottom", "");
-        if(cities.size()!=0){
+        for (int i =0 ; i < cities.size(); i++){
             createItemCities();
         }
+//        if(cities.size()!=0 ){
+//            createItemCities();
+//        }
     }
     public void createItemCities() throws CityNullException {
         Uti.info("MaFen", "createItemCities", "");
-        for (int i = 0; i< cities.size(); i++ ){
+        for (int i = 0; i< cities.size(); i++ )
+        {
             ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
-
 //                itemAnswerCity.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable));
-            bottom.add(    new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable),BorderLayout.SOUTH);
+            bottom.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable),BorderLayout.SOUTH);
 //                bottom.add(itemAnswerCity);
         }
     }
@@ -241,7 +244,6 @@ public class MaFen extends JFrame implements FocusListener {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
     }
-
     public boolean testInternetConnection() {
         Uti.info("MaFen", "testInternetConnection", "");
         /**

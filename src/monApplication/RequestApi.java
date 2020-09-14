@@ -222,7 +222,7 @@ public class RequestApi  {
         Uti.mess("sortie run");
     }
     public boolean isFormatInseeCodeRespected(String insee){
-        return Uti.RegularExpressionTest.booleanTestRegex("\\d{5}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers");
+        return Uti.RegularExpressionTest.booleanTestRegex("\\d{5}|d{1}[A-Z]d{3}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers sauf la Corse commençant par 2A ou 2B.");
     }
     public boolean isFormatCityNameRespected(String cityName){
         // todo nom de ville avec espace - ou lettre
@@ -265,7 +265,7 @@ public class RequestApi  {
         System.out.println("characterStringObtained : "+characterStringObtained);
         JSONParser jsonParser = new JSONParser();
         maFen.cities =extractJsonArrayFromReceiveResponse( characterStringObtained, jsonParser);
-        maFen.cities.add(city);
+//        maFen.cities.add(city);
         this.city = city;
         maFen.bottomAnswer();
     }
