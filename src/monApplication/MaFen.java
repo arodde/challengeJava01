@@ -1,6 +1,7 @@
 package monApplication;
 
 import monApplication.classApi.City;
+import monApplication.item_answer.CityNullException;
 import monApplication.item_answer.ItemAnswerCity;
 import org.json.simple.JSONObject;
 import uti.ManageWindowPositionInScreen;
@@ -207,16 +208,20 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "bottomAnswer", "");
 //        adjustBottomSize();
         bottom.setBackground(Color.cyan);
-        updateBottom();
+        try {
+            updateBottom();
+        } catch (CityNullException e) {
+            e.printStackTrace();
+        }
 
     }
-    public void updateBottom(){
+    public void updateBottom() throws CityNullException {
         Uti.info("MaFen", "updateBottom", "");
         if(cities.size()!=0){
             createItemCities();
         }
     }
-    public void createItemCities(){
+    public void createItemCities() throws CityNullException {
         Uti.info("MaFen", "createItemCities", "");
         for (int i = 0; i< cities.size(); i++ ){
             ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
