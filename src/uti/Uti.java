@@ -196,6 +196,13 @@ public  class Uti{
             }
             return isCorrectMatcherForPattern;
         }
+        public static void main(String[] args){
+            // "[A-Za-z]([a-zA-Z0-9-]|\\s)*$[a-zA-Z0-9]"
+
+            RegularExpressionTest.booleanTestRegex("[A-Za-z]","t","1 :)","1 :(");
+            RegularExpressionTest.booleanTestRegex("([a-zA-Z0-9-]|\\\\s)*","oulo","2 :)","2 :(");
+            RegularExpressionTest.booleanTestRegex("$[a-zA-Z0-9]","n","3 :)","3 :(");
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import uti.Uti;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TutorialJSONSimple {
@@ -200,66 +201,6 @@ public class TutorialJSONSimple {
             e.printStackTrace();
         }
     }
-    public City displaysCityJSONStringContentFromJsonFile(String filePath){
-        Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
-        /**
-         * uses a JSON String from a file and create an object
-         * para 1 : String : path of the file
-         * return value : a city
-         */
-//        String s = "xyztmp/tutoJsonSimple/city.json";
-        JSONParser parser = new JSONParser();
-        Reader reader = null;
-        try {
-            reader = new FileReader(filePath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Object jsonObj = new JSONObject();
-        City city = new City();
-        try {
-//            jsonObj = parser.parse(para);
-
-            jsonObj = parser.parse(reader);
-            JSONObject jsonObject = (JSONObject) jsonObj;
-            String insee = (String) jsonObject.get("insee");
-            String name = (String) jsonObject.get("name");
-            int cp = ((Long) jsonObject.get("cp")).intValue();
-            double latitude = (double) jsonObject.get("latitude");
-            double longitude = (double) jsonObject.get("longitude");
-            int altitude = ((Long) jsonObject.get("altitude")).intValue();
-            JSONArray cities = (JSONArray) jsonObject.get("cities");
-
-//            System.out.println("Code insee = " + insee);
-//            System.out.println("Nom = " + name);
-//            System.out.println("Code Postal = " + cp);
-//            System.out.println("Latitude " + latitude);
-//            System.out.println("Longitude = " + longitude);
-//            System.out.println("Altitude = " + altitude);
-//                @SuppressWarnings("unchecked")
-//                Iterator<String> it = cities.iterator();
-//
-//                while (it.hasNext()) {
-//                    System.out.println("City = " + it.next());
-//                }
-//            try {
-//                reader.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            city.insee = insee;
-            city.name = name;
-            city.cp = cp;
-            city.latitude = latitude;
-            city.longitude = longitude;
-            city.altitude = altitude;
-
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
-        }
-        return city;
-    }
     public City displaysCityJSONStringContentFromJsonString(String jsonString){
         Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
         /**
@@ -270,57 +211,81 @@ public class TutorialJSONSimple {
 //        String s = "xyztmp/tutoJsonSimple/city.json";
         JSONParser parser = new JSONParser();
         Reader reader = null;
-//        try {
-//            reader = new FileReader(jsonString);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            reader = new FileReader(jsonString);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         JSONObject jsonObjectReceived = new JSONObject();
         JSONObject jsonObjectCity = new JSONObject();
         City city = new City();
         try {
-//            jsonObj = parser.parse(jsonString);
-
-//            jsonObj = parser.parse(reader);
             jsonObjectReceived = (JSONObject) parser.parse(jsonString);
             jsonObjectCity = (JSONObject) jsonObjectReceived.get("city");
-
-            String insee = (String) jsonObjectCity.get("insee");
-            String name = (String) jsonObjectCity.get("name");
-            int cp = ((Long) jsonObjectCity.get("cp")).intValue();
-            double latitude = (double) jsonObjectCity.get("latitude");
-            double longitude = (double) jsonObjectCity.get("longitude");
-            int altitude = ((Long) jsonObjectCity.get("altitude")).intValue();
-            JSONArray cities = (JSONArray) jsonObjectCity.get("cities");
-
-//            System.out.println("Code insee = " + insee);
-//            System.out.println("Nom = " + name);
-//            System.out.println("Code Postal = " + cp);
-//            System.out.println("Latitude " + latitude);
-//            System.out.println("Longitude = " + longitude);
-//            System.out.println("Altitude = " + altitude);
-//                @SuppressWarnings("unchecked")
-//                Iterator<String> it = cities.iterator();
-//
-//                while (it.hasNext()) {
-//                    System.out.println("City = " + it.next());
-//                }
-//            try {
-//                reader.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            city.insee = insee;
-            city.name = name;
-            city.cp = cp;
-            city.latitude = latitude;
-            city.longitude = longitude;
-            city.altitude = altitude;
-
+            city = cityAffectation(city,jsonObjectCity);
         } catch (ParseException /*| IOException */e) {
             e.printStackTrace();
         }
+        return city;
+    }
+    public ArrayList<City> displaysCitiesJSONStringContentFromJsonFile(String characterStringObtained) throws ParseException {
+        Uti.info("TutorialJSONSimple","displaysCitiesJSONStringContentFromJsonFile","");
+        /**
+         * uses a JSON String from a file and create a list of cities
+         * para 1 : String : path of the file
+         * return value : cities
+         */
+//        Reader reader = null;
+        JSONParser parser = new JSONParser();
+        JSONArray myCities = new JSONArray();
+//        JSONObject jsonObj = new JSONObject();
+        JSONArray arrayObjectCities = new JSONArray();
+        JSONObject jsonObjectCities = new JSONObject();
+        ////        String s = "xyztmp/tutoJsonSimple/city.json";
+//        try {
+//            reader = new FileReader(characterStringObtained);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        Uti.mess("couac 1-0");
+//        try {
+        //            jsonObj = parser.parse(para);
+//            jsonObj = parser.parse(reader);
+//            arrayObjectCities = (JSONArray) parser.parse(reader);
+        jsonObjectCities = (JSONObject) parser.parse(characterStringObtained);
+        arrayObjectCities = (JSONArray) jsonObjectCities.get("cities");
+        myCities = (JSONArray) citiesCourse(arrayObjectCities,myCities);
+        return myCities;
+    }
+    public ArrayList<City> citiesCourse( JSONArray arrayObjectCities,ArrayList<City> myCities){
+        Uti.info("TutorialJSONSimple","citiesCourse","");
+        City city ;
+        for(int i = 0 ; i < arrayObjectCities.size(); i++){
+            System.out.println(arrayObjectCities.get(i));
+            city = new City();
+            city = cityAffectation(city, (JSONObject) arrayObjectCities.get(i));
+            myCities.add(city);
+            city= null;
+        }
+        return myCities;
+    }
+    public City cityAffectation(City city, JSONObject jsonObjectCity){
+        Uti.info("TutorialJSONSimple","cityAffectation","");
+        String insee = (String) jsonObjectCity.get("insee");
+        String name = (String) jsonObjectCity.get("name");
+        int cp = ((Long) jsonObjectCity.get("cp")).intValue();
+        double latitude = (double) jsonObjectCity.get("latitude");
+        double longitude = (double) jsonObjectCity.get("longitude");
+        int altitude = ((Long) jsonObjectCity.get("altitude")).intValue();
+        JSONArray cities = (JSONArray) jsonObjectCity.get("cities");
+
+        city.insee = insee;
+        city.name = name;
+        city.cp = cp;
+        city.latitude = latitude;
+        city.longitude = longitude;
+        city.altitude = altitude;
         return city;
     }
 }
