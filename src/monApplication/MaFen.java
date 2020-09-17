@@ -43,9 +43,11 @@ public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
     public JPanel bottom;
+    public JScrollBar jScrollBar;
     //    public City city;
     public monApplication.CityWeatherInformations cityWeatherInformations;
     public JPanel mainPanel = new JPanel();
+    public JScrollPane jScrollPane  = new JScrollPane();
     public BorderLayout borderLayout= new BorderLayout();
     public TestConnection testConnection = new TestConnection();
     //    public JButton buttonAskWeatherInformations = new JButton();
@@ -169,7 +171,9 @@ public class MaFen extends JFrame implements FocusListener {
         topPanelSetting();
         bottomSetting();
         mainPanelLayout();
-        this.setContentPane(mainPanel);
+        addScrollPaneToMaFen();
+
+
         this.setVisible(true);
     }
     public void frameInitialization(){
@@ -178,7 +182,9 @@ public class MaFen extends JFrame implements FocusListener {
         this.setSize(900, 900);
         this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         postionFrameInScreen(75,75);
+
     }
     private void postionFrameInScreen(int posX,int posY){
         try {
@@ -226,13 +232,23 @@ public class MaFen extends JFrame implements FocusListener {
     }
     public void createItemCities() throws CityNullException {
         Uti.info("MaFen", "createItemCities", "");
+        JPanel jpan ;
         for (int i = 0; i< cities.size(); i++ )
         {
+            jpan = new JPanel();
             ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
 //                itemAnswerCity.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable));
-            bottom.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable),BorderLayout.SOUTH);
+            jpan.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable));
 //                bottom.add(itemAnswerCity);
+            bottom.add(jpan);
+
         }
+//        adjustSizeContent();
+    }
+    public void adjustSizeContent(){
+        Uti.info("MaFen", "adjustSizeContent", "");
+        bottom.getInsets();
+        getInsets();
     }
     public void adjustBottomSize(){
         Uti.info("MaFen", "adjustBottomSize", "");
@@ -240,9 +256,17 @@ public class MaFen extends JFrame implements FocusListener {
     }
     public void mainPanelLayout(){
         Uti.info("MaFen", "mainPanelLayout", "");
-        mainPanel.setBackground(Color.white);
+        mainPanel.setBackground(Color.yellow);
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(bottom), BorderLayout.CENTER);
+        mainPanel.add(new JScrollPane(bottom),BorderLayout.SOUTH);
+
+    }
+    public void addScrollPaneToMaFen(){
+        Uti.info("MaFen", "addScrollPaneToMaFen", "");
+        jScrollPane = new JScrollPane(mainPanel);
+        this.setContentPane(jScrollPane);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
     public boolean testInternetConnection() {
         Uti.info("MaFen", "testInternetConnection", "");
