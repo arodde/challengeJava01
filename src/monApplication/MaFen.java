@@ -223,12 +223,16 @@ public class MaFen extends JFrame implements FocusListener {
     }
     public void updateBottom() throws CityNullException {
         Uti.info("MaFen", "updateBottom", "");
+        razBottom();
         for (int i =0 ; i < cities.size(); i++){
             createItemCities();
         }
 //        if(cities.size()!=0 ){
 //            createItemCities();
 //        }
+    }
+    public void razBottom(){
+        Uti.info("MaFen", "razBottom", "");
     }
     public void createItemCities() throws CityNullException {
         Uti.info("MaFen", "createItemCities", "");
