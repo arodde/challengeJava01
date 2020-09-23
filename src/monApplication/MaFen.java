@@ -178,8 +178,8 @@ public class MaFen extends JFrame implements FocusListener {
     public void frameInitialization(){
         Uti.info("MaFen", "frameInitialization", "");
         this.setTitle("Affichage Météo par ville");
-        this.setSize(600, 600);
-        this.setResizable(true);
+        this.setSize(725, 600);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        postionFrameInScreen(75,75);
     }
@@ -230,7 +230,7 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "createItemCities", "");
         bottom.setLayout(new BoxLayout(bottom, BoxLayout.PAGE_AXIS));
         ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
-        bottom.add(new JScrollPane(itemAnswerCity.cityWeatherInformations.infoCityJTable));
+        bottom.add(itemAnswerCity.cityWeatherInformations.infoCityJTable);
         bottom.setBackground(Color.yellow);
     }
 
