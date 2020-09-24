@@ -121,8 +121,8 @@ public class RequestApi  {
         City city=new City();
         param=(cityName!=""?"&search="+cityName:"");
         // todo retirer les caracères spéciaux et remplacer par la lettre simple et l'espace par un '-'
+//        param= Uti.RegularExpressionTest.translate(param);
         param= Uti.RegularExpressionTest.replaceForbiddenCharacters(param);
-       Uti.RegularExpressionTest.replaceSpecialsCharAndSpaceOfCityName(param);
         URL url = urlConception(forecastType[1],token,param.trim());
 
         try {

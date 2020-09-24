@@ -22,6 +22,7 @@ public class ItemAnswerCity extends JPanel {
 
             setMaximumSize(new Dimension(maFen.getWidth(),title.getHeight()*7));
             cityWeatherInformations = new CityWeatherInformations(city);
+
 //            maFen.bottom.add(this.title, BorderLayout.NORTH);
             maFen.bottom.add(this.title, BorderLayout.NORTH);
 //            setSize(

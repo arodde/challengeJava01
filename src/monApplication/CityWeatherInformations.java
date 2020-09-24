@@ -25,7 +25,7 @@ public class CityWeatherInformations {
         //Les titres des colonnes
         String  title[] = {"Caractéristique", "Donnée"};
         infoCityJTable = new JTable(data, title);
-        infoCityJTable.setMaximumSize(new Dimension(500,100));
+        infoCityJTable.setMinimumSize(new Dimension(500,120));
         //        this.setDefaultCloseOperation(JTableExample.EXIT_ON_CLOSE);
 //        this.setTitle("JTable");
 //        this.setSize(300, 120);

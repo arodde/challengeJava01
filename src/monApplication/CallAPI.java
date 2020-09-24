@@ -42,7 +42,7 @@ public class CallAPI /*implements Runnable */{
 //                    new InputStreamReader(url.openStream()));
 //
 //        // todo serverAnswers exceptions or switch
-//              /*
+//
 //        String serverMessage;
 //        int serverAnswer = 0;
 //        switch (serverAnswer){

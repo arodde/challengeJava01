@@ -205,6 +205,9 @@ public  class Uti{
            System.out.println(replaceForbiddenCharacters(s));
         }
         public static String translate(String src) {
+            /**
+             * found on the web, doesn't act on the blank spaces to replace by '-'
+             */
             StringBuffer result = new StringBuffer();
             if(src!=null && src.length()!=0) {
                 int index = -1;
@@ -228,6 +231,14 @@ public  class Uti{
                     str = "abracadabra"
                     str = str.replace('a','z'); // gives "zbrzczdzbrz"
 
+                          * replace spaces by -
+                          * replace each spécial chars :
+                          *  'à', 'â', 'ä'         --->   'a'
+                          *  'é', 'è', 'ê', 'ë'    --->   'e'
+                          *  'î', 'ï'              --->   'i'
+                          *  'ö', 'ô'              --->   'o'
+                          *  'ù', 'û', 'ü'              --->   'u'
+                          *  ' '                   --->   '-'
 
              */
             str= str.replace('â','a');
@@ -248,24 +259,24 @@ public  class Uti{
             return str;
         }
 
-        public static void replaceSpecialsCharAndSpaceOfCityName(String testedString){
-            Uti.info("RequestApi","replaceSpecialsCharAndSpaceOfCityName","");
-            /**
-             * replace spaces by -
-             * replace each spécial chars :
-             *  'à', 'â', 'ä'         --->   'a'
-             *  'é', 'è', 'ê', 'ë'    --->   'e'
-             *  'î', 'ï'              --->   'i'
-             *  'ö', 'ô'              --->   'o'
-             *  'ù', 'û', 'ü'              --->   'u'
-             *  ' '                   --->   '-'
-             */
-            // todo prendre en compte l'espace dans le nom de la commune.
-            testedString="abcdefghijklmnopqrstuvwxyz";
-            String testedString2="aâäbcdeéèêëfghiîïjklmnoöôpqrstuùûüvwxyz";
+//        public static void replaceSpecialsCharAndSpaceOfCityName(String testedString){
+//            Uti.info("RequestApi","replaceSpecialsCharAndSpaceOfCityName","");
+//            /**
+//             * replace spaces by -
+//             * replace each spécial chars :
+//             *  'à', 'â', 'ä'         --->   'a'
+//             *  'é', 'è', 'ê', 'ë'    --->   'e'
+//             *  'î', 'ï'              --->   'i'
+//             *  'ö', 'ô'              --->   'o'
+//             *  'ù', 'û', 'ü'              --->   'u'
+//             *  ' '                   --->   '-'
+//             */
 
-
-        }
+//            testedString="abcdefghijklmnopqrstuvwxyz";
+//            String testedString2="aâäbcdeéèêëfghiîïjklmnoöôpqrstuùûüvwxyz";
+//
+//
+//        }
 
     }
 

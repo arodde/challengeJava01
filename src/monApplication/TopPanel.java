@@ -42,10 +42,9 @@ public class TopPanel extends JPanel {
 //        cityWeatherInformations.setText("");
 
         cityWeatherInformations.setSize(maFen.getWidth(),60);
-        cityWeatherInformations.setBackground(Color.CYAN);
         cityWeatherInformations.setBackground(Color.white);
         errorLabel.setSize(new Dimension(500,60));
-        errorLabel.setBackground(Color.white);
+        errorLabel.setBackground(Color.red);
         cityLabel.setText("Ville : ");
         this.setMaximumSize(new Dimension(maFen.getWidth(),cityLabel.getHeight()));
         askSearchButton = new JButton("Demander informations");
