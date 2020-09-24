@@ -31,8 +31,8 @@ public  class Uti{
     }
     public static boolean recommencer(String sQuestion, String sOption1, String sOption2){
         /*
-        * valide la poursuite d'une option selon le choix de l'utilisateur
-        * */
+         * valide la poursuite d'une option selon le choix de l'utilisateur
+         * */
         String sConsigne="";
         String sChoix="";
         boolean bOk= false;
@@ -63,12 +63,12 @@ public  class Uti{
     }
     public static String choixLettre(String sConsigne, String sProposition1, String sProposition2){
         /*
-        * contrôle la bonne saisie d'une lettre entre les 2 options proposées
-        * */
+         * contrôle la bonne saisie d'une lettre entre les 2 options proposées
+         * */
         Scanner sc= new Scanner(System.in);
         String sChoix="";
         boolean bOk= false;
-            while(!bOk){
+        while(!bOk){
             System.out.println(sConsigne);
             System.out.println("Votre choix? : "+sProposition1+"/"+sProposition2);
             sChoix = sc.nextLine();
@@ -174,15 +174,15 @@ public  class Uti{
 
     public static class RegularExpressionTest {
         public static Boolean booleanTestRegex(String sPattern, String sMatcher,String trueMessage, String falseMessage){
-        /**
-           this method gives a message which show if the pattern matches with the proposed string or not
-         para 1 : String : the regular expression to  follow
-         para 2 : String : the tested expression
-         para 3 : String : the message if the sMatcher respects the sPattern
-         para 4 : String : the message if the sMatcher doesn't respect the sPattern
-         returnValue : Boolean :
-        */
-        Uti.info("RegularExpressionTest","booleanTestRegex","");
+            /**
+             this method gives a message which show if the pattern matches with the proposed string or not
+             para 1 : String : the regular expression to  follow
+             para 2 : String : the tested expression
+             para 3 : String : the message if the sMatcher respects the sPattern
+             para 4 : String : the message if the sMatcher doesn't respect the sPattern
+             returnValue : Boolean :
+             */
+            Uti.info("RegularExpressionTest","booleanTestRegex","");
             boolean isCorrectMatcherForPattern = false;
             Pattern pattern = Pattern.compile(sPattern);
             Matcher matcher = pattern.matcher(sMatcher);
@@ -198,11 +198,75 @@ public  class Uti{
         }
         public static void main(String[] args){
             // "[A-Za-z]([a-zA-Z0-9-]|\\s)*$[a-zA-Z0-9]"
+            // RegularExpressionTest.booleanTestRegex("[A-Za-z]","t","1 :)","1 :(");
+            String s = "aâää bcçcdceéèêëfghiîïjklm noöôpqrstuùûüv wxyz";
+            System.out.println(s);
 
-            RegularExpressionTest.booleanTestRegex("[A-Za-z]","t","1 :)","1 :(");
-            RegularExpressionTest.booleanTestRegex("([a-zA-Z0-9-]|\\\\s)*","oulo","2 :)","2 :(");
-            RegularExpressionTest.booleanTestRegex("$[a-zA-Z0-9]","n","3 :)","3 :(");
+           System.out.println(replaceForbiddenCharacters(s));
         }
+        public static String translate(String src) {
+            StringBuffer result = new StringBuffer();
+            if(src!=null && src.length()!=0) {
+                int index = -1;
+                char c = (char)0;
+                String chars= "àâäéèêëîïôöùûüç";
+                String replace= "aaaeeeeiioouuuc";
+                for(int i=0; i<src.length(); i++) {
+                    c = src.charAt(i);
+                    if( (index=chars.indexOf(c))!=-1 )
+                        result.append(replace.charAt(index));
+                    else
+                        result.append(c);
+                }
+            }
+            return result.toString();
+        }
+        public static String replaceForbiddenCharacters(String str){
+            Uti.info("RequestApi","replaceForbiddenCharacters","");
+            /**
+             * function replace subtitutes the first character given in parameter by the second parameter given in parameter for each occurence found in the parameter of the function replaceForbiddenParameter()
+                    str = "abracadabra"
+                    str = str.replace('a','z'); // gives "zbrzczdzbrz"
+
+
+             */
+            str= str.replace('â','a');
+            str= str.replace('à','a');
+            str= str.replace('ä','a');
+            str= str.replace('é','e');
+            str= str.replace('è','e');
+            str= str.replace('ê','e');
+            str= str.replace('ë','e');
+            str= str.replace('î','i');
+            str= str.replace('ï','i');
+            str= str.replace('ô','o');
+            str= str.replace('ö','o');
+            str= str.replace('ù','u');
+            str= str.replace('û','u');
+            str= str.replace('ü','u');
+            str= str.replace(' ','-');
+            return str;
+        }
+
+        public static void replaceSpecialsCharAndSpaceOfCityName(String testedString){
+            Uti.info("RequestApi","replaceSpecialsCharAndSpaceOfCityName","");
+            /**
+             * replace spaces by -
+             * replace each spécial chars :
+             *  'à', 'â', 'ä'         --->   'a'
+             *  'é', 'è', 'ê', 'ë'    --->   'e'
+             *  'î', 'ï'              --->   'i'
+             *  'ö', 'ô'              --->   'o'
+             *  'ù', 'û', 'ü'              --->   'u'
+             *  ' '                   --->   '-'
+             */
+            // todo prendre en compte l'espace dans le nom de la commune.
+            testedString="abcdefghijklmnopqrstuvwxyz";
+            String testedString2="aâäbcdeéèêëfghiîïjklmnoöôpqrstuùûüvwxyz";
+
+
+        }
+
     }
 
 }

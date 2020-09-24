@@ -119,10 +119,12 @@ public class RequestApi  {
          */
         Uti.info("RequestApi","getCitiesWithInputName","");
         City city=new City();
-//        JSONArray jsonArrayCity = null;
         param=(cityName!=""?"&search="+cityName:"");
+        // todo retirer les caracères spéciaux et remplacer par la lettre simple et l'espace par un '-'
+        param= Uti.RegularExpressionTest.replaceForbiddenCharacters(param);
+       Uti.RegularExpressionTest.replaceSpecialsCharAndSpaceOfCityName(param);
         URL url = urlConception(forecastType[1],token,param.trim());
-        // todo à adapter en fonction de la nouvelle requête fondée sur le nom de commune
+
         try {
             if(isFormatCityNameRespected(cityName))
             {
@@ -136,6 +138,12 @@ public class RequestApi  {
         }
 
     }
+    public static void main(String[] args){
+        String testedString="abcdefghijklmnopqrstuvwxyz";
+        String testedString2="aâäbcdeéèêëfghiîïjklmnoöôpqrstuùûüvwxyz";
+
+    }
+
     public void oldGetCitiesWithInputName(String cityName) { // future function's name "getCitiesWithCityName"
         /**
          * aim: to do a request to the api and get a json object created
@@ -226,19 +234,15 @@ public class RequestApi  {
     }
     public boolean isFormatCityNameRespected(String cityName){
         // todo nom de ville avec espace - ou lettre
-        return Uti.RegularExpressionTest.booleanTestRegex("[A-Za-z]([a-zA-Z0-9-]|\\\\s)*[a-zA-Z0-9]",cityName,"nom de commune correcte","nom de commune incorrect, unique des caractères et le caractère '-'");
+        return Uti.RegularExpressionTest.booleanTestRegex("[A-Za-z]([a-zA-Z0-9-]|\\s)*[a-zA-Z0-9]",cityName,"nom de commune correcte","nom de commune incorrect, unique des caractères et le caractère '-'");
     }
     public void establishConnectionWithApi(URL url) throws IOException {
         Uti.info("RequestApi","establishConnectionWithApi","");
-
         System.out.println(url);
         urlConnection = (HttpURLConnection) url.openConnection();
         try {
-
 //                receivedCityApiResponse();
-
                 receivedCitiesApiResponse();
-
         } catch (ParseException e) {
             System.out.println("la réponse de l'API ne permet pas de trouver une commune correspondant au code insee saisi.");
             e.printStackTrace();

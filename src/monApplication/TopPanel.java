@@ -32,7 +32,7 @@ public class TopPanel extends JPanel {
 
     public TopPanel(MaFen maFen){
         Uti.info("TopPanel", "TopPanel","");
-        setPreferredSize(new Dimension(this.getWidth(), 50));
+        setPreferredSize(new Dimension(maFen.getWidth(), 50));
         this.maFen = maFen;
         preparation();
         positionOnMaFen();
@@ -41,15 +41,16 @@ public class TopPanel extends JPanel {
         Uti.info("TopPanel", "preparation","");
 //        cityWeatherInformations.setText("");
 
-        cityWeatherInformations.setSize(200,60);
+        cityWeatherInformations.setSize(maFen.getWidth(),60);
         cityWeatherInformations.setBackground(Color.CYAN);
         cityWeatherInformations.setBackground(Color.white);
-        errorLabel.setSize(new Dimension(200,60));
+        errorLabel.setSize(new Dimension(500,60));
         errorLabel.setBackground(Color.white);
         cityLabel.setText("Ville : ");
         this.setMaximumSize(new Dimension(maFen.getWidth(),cityLabel.getHeight()));
         askSearchButton = new JButton("Demander informations");
         askSearchButton.addActionListener(sendRequestListener);
+
 
     }
     public void positionOnMaFen(){

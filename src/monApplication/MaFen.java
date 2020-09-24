@@ -59,6 +59,9 @@ public class MaFen extends JFrame implements FocusListener {
     public JSONObject jsonObject = null;
     public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
+    public int widthFrame = 500;
+    public int heigthFrame = 500;
+    public Dimension dimensionFrame = new Dimension(widthFrame,heigthFrame);
     // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
 
     public static void main(String[] args) {
@@ -178,8 +181,8 @@ public class MaFen extends JFrame implements FocusListener {
     public void frameInitialization(){
         Uti.info("MaFen", "frameInitialization", "");
         this.setTitle("Affichage Météo par ville");
-        this.setSize(725, 600);
-        this.setResizable(false);
+        this.setSize(dimensionFrame);
+        this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        postionFrameInScreen(75,75);
     }
@@ -198,12 +201,12 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "topPanelSetting", "");
         topPanel = new TopPanel(this);
         topPanel.cityWeatherInformations.addFocusListener(this);
-        topPanel.setPreferredSize(new Dimension(this.getWidth(), 50));
+        topPanel.setPreferredSize(new Dimension(widthFrame, 50));
     }
     public void bottomSetting(){
         Uti.info("MaFen", "bottomSetting", "");
         bottom = new JPanel();
-        bottom.setBackground(Color.pink);
+        bottom.setBackground(Color.black);
         bottom.setLayout(borderLayout);
     }
     public void bottomAnswer(){
@@ -231,7 +234,6 @@ public class MaFen extends JFrame implements FocusListener {
         bottom.setLayout(new BoxLayout(bottom, BoxLayout.PAGE_AXIS));
         ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
         bottom.add(itemAnswerCity.cityWeatherInformations.infoCityJTable);
-        bottom.setBackground(Color.yellow);
     }
 
 
@@ -265,7 +267,7 @@ public class MaFen extends JFrame implements FocusListener {
          */
         jScrollPane = new JScrollPane(mainPanel);
 //        jScrollPane = new JScrollPane(bottom);
-        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 //        this.setContentPane(jScrollPane);
         add(jScrollPane);
@@ -337,12 +339,12 @@ public class MaFen extends JFrame implements FocusListener {
 
     @Override
     public void focusGained(FocusEvent focusEvent) {
-
+        System.out.println("maFen : FocusGained");
     }
 
     @Override
     public void focusLost(FocusEvent focusEvent) {
-
+        System.out.println("maFen : FocusLost");
     }
 
 
