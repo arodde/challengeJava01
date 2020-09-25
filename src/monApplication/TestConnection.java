@@ -12,61 +12,6 @@ public class TestConnection {
      * test the internet connection
      */
 
-//        Thread threadOfConnection;
-
-
-//
-//        public void testInternetConnection2() {
-//            Uti.info("TestConnection", "testInternetConnection2", "");
-//            /**
-//             * check if the internet's connection orders and if the url is real.
-//
-//            check the text in jEditorPaneCity
-//            if it 's different of "" or null
-//             */
-////            modification
-////            author:
-////            AR
-////            release 0.0.2
-////            date 20200716
-//            if (cityWeatherInformations.getText().trim() != "" || cityWeatherInformations != null) {
-//                //      check internet connection
-//                boolean connectionOk = false;
-//                if (testInternetConnection()) {
-//                    //      if connection ok
-//                    //          create thread
-//                    //          stock recept data
-//                    System.out.println("ok test");
-//                    // check if the internet's connection orders and if the url is real.
-//                    connectionOk = testInternetConnection();
-//                    request = testedUrl + "";
-////                    requestApi.url = testedUrl;
-//                    threadOfConnection = new Thread(new CallAPI(requestApi, stringJSON)); // need url with town and token
-//                    threadOfConnection.start();
-//                } else {
-//                    System.out.println("échec de connexion");
-//                }
-//            }
-//
-//            if (topPanel.cityWeatherInformations.getText() != "" || topPanel.cityWeatherInformations != null) {
-//                //      check internet connection
-//                boolean connectionOk = false;
-//                if (testInternetConnection()) {
-//                    //      if connection ok
-//                    //          create thread
-//                    //          stock recept data
-//                    System.out.println("ok test");
-//                    // check if the internet's connection orders and if the url is real.
-//                    connectionOk = testInternetConnection();
-//                    request = testedUrl + "";
-////                    requestApi.url = testedUrl;
-//                    threadOfConnection = new Thread(new CallAPI(requestApi, stringJSON)); // need url with town and token
-//                    threadOfConnection.start();
-//                } else {
-//                    System.out.println("échec de connexion");
-//                }
-//            }
-//        }
 
     public void preliminaryTestInternetConnection() throws UnknownHostException, IOException {
         /**
@@ -107,9 +52,7 @@ public class TestConnection {
                         System.out.println("cas d'erreur non prêvu par l'api.");
                         break;
                 }
-//                    if (con.getResponseCode() == 200) {
-//                        System.out.println("Connection established!!");
-//                    }
+
             } catch (Exception exception) {
                 System.out.println("No Connection");
             }
@@ -117,10 +60,7 @@ public class TestConnection {
             e.printStackTrace();
         }
     }
-    // modification
-    // author: AR
-    // release 0.0.1
-    // date 20200716
+
     public void displayServerResponse(int value){
         /**
          * this function displays the server response.
@@ -167,9 +107,7 @@ public class TestConnection {
                 httpURLConnection.connect();
                 displayServerResponse(httpURLConnection.getResponseCode());
 
-//                    if (con.getResponseCode() == 200) {
-//                        System.out.println("Connection established!!");
-//                    }
+
             } catch (Exception exception) {
                 System.out.println("No Connection");
             }

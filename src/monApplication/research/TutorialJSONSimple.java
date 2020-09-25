@@ -211,11 +211,11 @@ public class TutorialJSONSimple {
 //        String s = "xyztmp/tutoJsonSimple/city.json";
         JSONParser parser = new JSONParser();
         Reader reader = null;
-        try {
-            reader = new FileReader(jsonString);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            reader = new FileReader(jsonString);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         JSONObject jsonObjectReceived = new JSONObject();
         JSONObject jsonObjectCity = new JSONObject();

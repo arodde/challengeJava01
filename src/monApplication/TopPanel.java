@@ -8,19 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-// modification
-// author: AR
-// release 0.0.1
-// date 20200716
+
 public class TopPanel extends JPanel {
     /**
      * This panel is the part of frame with which the user interact for the application.
      * the button serves to ask to api the information with the request
      */
-    // modification
-    // author: AR
-    // release 0.0.2
-    // date 20200720
+
     public MaFen maFen;
     public JLabel cityLabel = new JLabel();
     public JTextField cityWeatherInformations = new JTextField ("                ");
@@ -39,7 +33,6 @@ public class TopPanel extends JPanel {
     }
     public void preparation(){
         Uti.info("TopPanel", "preparation","");
-//        cityWeatherInformations.setText("");
 
         cityWeatherInformations.setSize(maFen.getWidth(),60);
         cityWeatherInformations.setBackground(Color.white);
@@ -60,38 +53,7 @@ public class TopPanel extends JPanel {
         add(askSearchButton,BorderLayout.SOUTH);
         setBackground(Color.lightGray);
     }
-    //    // modification
-//    // author: AR
-//    // release 0.0.2
-//    // date 20200716
-//    public TestConnection testConnection = new TestConnection();
-//    class CityWeatherInformations extends JTextField implements FocusListener{
-//        public TestConnection testConnection = new TestConnection();
-//        @Override
-//        public void focusGained(FocusEvent e) {
-//           Uti.info("CityWeatherInformations","focusGained","");
-//            try {
-//                testConnection.testConnectionInternet();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
-//        @Override
-//        public void focusLost(FocusEvent e) {
-//            Uti.info("CityWeatherInformations","focusLost","");
-//            try {
-//                testConnection.testConnectionInternet();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
-//    }
-//
 
-    // modification
-    // author: AR
-    // release 0.0.2
-    // date 20200716
 
     class SendRequestListener implements ActionListener {
 

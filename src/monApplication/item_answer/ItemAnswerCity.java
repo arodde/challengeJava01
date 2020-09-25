@@ -23,24 +23,11 @@ public class ItemAnswerCity extends JPanel {
             setMaximumSize(new Dimension(maFen.getWidth(),title.getHeight()*7));
             cityWeatherInformations = new CityWeatherInformations(city);
 
-//            maFen.bottom.add(this.title, BorderLayout.NORTH);
             maFen.bottom.add(this.title, BorderLayout.NORTH);
-//            setSize(
-//                    new Dimension(
-//                            maFen.getWidth(),
-//                            title.getHeight()+cityWeatherInformations.infoCityJTable.getRowCount()
-//                    )
-//            );
 
-//        add(this.title);
-//        maFen.bottom.add(this);
-//        defineSize();
-//        this.setBackground(Color.green);
         }
 
 
     }
-//    public void defineSize(){
-//        this.setSize(maFen.bottom.getWidth(),200);
-//    }
+
 }

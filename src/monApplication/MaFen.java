@@ -20,26 +20,6 @@ import java.util.ArrayList;
 
 
 public class MaFen extends JFrame implements FocusListener {
-    // modification
-    // author: AR
-    // release 0.0.1
-    // date 20200716
-//    public JLabel cityLabel = new JLabel();
-//    public JTextField cityWeatherInformations = new JTextField();
-//    public JLabel errorLabel = new JLabel();
-//    public JPanel top = new JPanel();
-//
-//    public JPanel bottom = new JPanel();
-//    public JPanel mainPanel = new JPanel();
-//    public JTable weatherJTable;
-//    //    public JButton buttonAskWeatherInformations = new JButton();
-//
-//    public TestConnection testConnection = new TestConnection();
-//    public URL testedUrl;
-//    public String request = "";
-//    public String stringJSON ="";
-//    public RequestApi requestApi = new RequestApi();
-//    public JSONObject jsonObject=null;
 
     public TopPanel topPanel;
     public JPanel bottom;
@@ -49,13 +29,11 @@ public class MaFen extends JFrame implements FocusListener {
     public JScrollPane jScrollPane  = new JScrollPane();
     public BorderLayout borderLayout= new BorderLayout();
     public TestConnection testConnection = new TestConnection();
-    //    public JButton buttonAskWeatherInformations = new JButton();
 
-    //    public TestConnection testConnection = new TestConnection();
     public URL testedUrl;
     public String request = "";
     public String stringJSON = "";
-    //    public RequestApi requestApi ;
+
     public JSONObject jsonObject = null;
     public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
@@ -132,6 +110,7 @@ public class MaFen extends JFrame implements FocusListener {
             createItemCities(i);
         }
     }
+
     public void razBottom(){
         Uti.info("MaFen", "razBottom", "");
         bottom.removeAll();
@@ -142,7 +121,6 @@ public class MaFen extends JFrame implements FocusListener {
         ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
         bottom.add(itemAnswerCity.cityWeatherInformations.infoCityJTable);
     }
-
 
     public void adjustSizeContent(){
         Uti.info("MaFen", "adjustSizeContent", "");
@@ -184,34 +162,8 @@ public class MaFen extends JFrame implements FocusListener {
          *  true if the internet connection orders. The url is correct OR NOT correct
          *  false if the internet connection doesn't orders.
          */
-        // test connection
-//        String testedUrl = "https://openclassrooms.com/";
-        String testedUrl = "https://api.meteo-concept.com/api/";
-        // modification
-        // author: AR
-        // release 0.0.1
-        // date 20200716
-//        try {
-//            URL url = new URL(testedUrl);
-//            URLConnection connection = url.openConnection();
-//
-//            connection.connect();
-//            System.out.println("1");
-//            System.out.println("Vous êtes connectés à internet");
-//            errorLabel.setText("Vous êtes connectés à internet");
-//            return true;
-//        } catch (MalformedURLException e) {
-//            System.out.println("2");
-//            System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-//            errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
-//            return false;
-//        } catch (IOException e) {
-//            System.out.println("3");
-//            System.out.println("Une connexion à internet est requise");
-//             errorLabel.setText("Une connexion à internet est requise");
 
-//            return false;
-//        }
+        String testedUrl = "https://api.meteo-concept.com/api/";
         try {
             URL url = new URL(testedUrl);
             apiFound(url);
