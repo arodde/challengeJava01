@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.*;
 
 public class RequestApi  {
+
     public String forecastType[] = new String[7];
     private String token;
     public String param;
@@ -25,7 +26,7 @@ public class RequestApi  {
         Uti.info("RequestApi","RequestApi()","");
         this.maFen = maFen;
         initialisation();
-        // todo function analyse input and use the appropriate request
+        // todo function analyse input and use the appropriate request ou ajouter un menu
         try {
             getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
 //            getCitiesWithInputName(this.maFen.topPanel.cityWeatherInformations.getText().trim());
@@ -142,7 +143,6 @@ public class RequestApi  {
 
 
         City city=new City();
-//        JSONArray jsonArrayCity = null;
         param=(cityName!=""?"&search="+cityName:"");
 
         try {

@@ -3,7 +3,6 @@ package monApplication;
 import monApplication.classApi.City;
 import monApplication.item_answer.CityNullException;
 import monApplication.item_answer.ItemAnswerCity;
-import org.json.simple.JSONObject;
 import uti.ManageWindowPositionInScreen;
 import uti.UnpossibleMeasureException;
 import uti.Uti;
@@ -23,19 +22,18 @@ public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
     public JPanel bottom;
-    //    public City city;
     public monApplication.CityWeatherInformations cityWeatherInformations;
     public JPanel mainPanel = new JPanel();
     public JScrollPane jScrollPane  = new JScrollPane();
-    public BorderLayout borderLayout= new BorderLayout();
-    public TestConnection testConnection = new TestConnection();
+//    public BorderLayout borderLayout= new BorderLayout();
+//    public TestConnection testConnection = new TestConnection();
 
     public URL testedUrl;
-    public String request = "";
-    public String stringJSON = "";
-
-    public JSONObject jsonObject = null;
-    public ItemAnswerCity itemAnswerCity;
+//    public String request = "";
+//    public String stringJSON = "";
+//
+//    public JSONObject jsonObject = null;
+//    public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
     public int widthFrame = 500;
     public int heigthFrame = 500;
@@ -69,7 +67,6 @@ public class MaFen extends JFrame implements FocusListener {
         this.setSize(dimensionFrame);
         this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        postionFrameInScreen(75,75);
     }
     private void postionFrameInScreen(int posX,int posY){
         try {
@@ -92,7 +89,6 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "bottomSetting", "");
         bottom = new JPanel();
         bottom.setBackground(Color.black);
-//        bottom.setLayout(borderLayout);
     }
     public void bottomAnswer(){
         Uti.info("MaFen", "bottomAnswer", "");
@@ -212,6 +208,7 @@ public class MaFen extends JFrame implements FocusListener {
             Uti.info("CityWeatherInformations","focusGained","");
             checkConnection();
         }
+
         @Override
         public void focusLost(FocusEvent e) {
             Uti.info("CityWeatherInformations","focusLost","");
