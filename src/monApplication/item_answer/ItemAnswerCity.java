@@ -20,7 +20,7 @@ public class ItemAnswerCity extends JPanel {
             title.setText(city.getName()) ;
             setMaximumSize(new Dimension(maFen.getWidth(),title.getHeight()*7));
             cityWeatherInformations = new CityWeatherInformations(city);
-            maFen.bottom.add(this.title, BorderLayout.NORTH);
+            maFen.resultBottom.add(this.title, BorderLayout.NORTH);
         }
     }
 }

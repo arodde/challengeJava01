@@ -236,7 +236,7 @@ public class RequestApi  {
         cityConsoleDescription();
         maFen.cities.add(city);
         this.city = city;
-        maFen.bottomAnswer();
+        maFen.resultBottom.bottomAnswer();
     }
     public void receivedCitiesApiResponse() throws ParseException, IOException {
         Uti.info("RequestApi","receivedCityApiResponse","");
@@ -247,7 +247,7 @@ public class RequestApi  {
         maFen.cities =extractJsonArrayFromReceiveResponse( characterStringObtained, jsonParser);
 //        maFen.cities.add(city);
         this.city = city;
-        maFen.bottomAnswer();
+        maFen.resultBottom.bottomAnswer();
     }
     public City extractJsonObjectFromReceiveResponse( String characterStringObtained,  JSONParser jsonParser) throws ParseException {
 

@@ -21,15 +21,16 @@ import java.util.ArrayList;
 public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
-    public JPanel bottom;
+//    public JPanel bottom;
+    public ResultBottom resultBottom;
     public monApplication.CityWeatherInformations cityWeatherInformations;
     public JPanel mainPanel = new JPanel();
     public JScrollPane jScrollPane  = new JScrollPane();
-//    public BorderLayout borderLayout= new BorderLayout();
+    //    public BorderLayout borderLayout= new BorderLayout();
 //    public TestConnection testConnection = new TestConnection();
-public Menu menu= new Menu(this);
+    public Menu menu= new Menu(this);
     public URL testedUrl;
-//    public String request = "";
+    //    public String request = "";
 //    public String stringJSON = "";
 //
 //    public JSONObject jsonObject = null;
@@ -80,66 +81,44 @@ public Menu menu= new Menu(this);
             );
         }
     }
+
     public void topPanelSetting(){
         Uti.info("MaFen", "topPanelSetting", "");
         topPanel = new TopPanel(this);
         topPanel.cityWeatherInformations.addFocusListener(this);
         topPanel.setPreferredSize(new Dimension(widthFrame, 50));
     }
+
     public void bottomSetting(){
         Uti.info("MaFen", "bottomSetting", "");
-        bottom = new JPanel();
-        bottom.setBackground(Color.black);
-    }
-    public void bottomAnswer(){
-        Uti.info("MaFen", "bottomAnswer", "");
-        bottom.setBackground(Color.WHITE);
-        try {
-            updateBottom();
-        } catch (CityNullException e) {
-            e.printStackTrace();
-        }
-    }
-    public void updateBottom() throws CityNullException {
-        Uti.info("MaFen", "updateBottom", "");
-        razBottom();
-        for (int i =0 ; i < cities.size(); i++){
-            createItemCities(i);
-        }
+        resultBottom = new ResultBottom(this);
     }
 
-    public void razBottom(){
-        Uti.info("MaFen", "razBottom", "");
-        bottom.removeAll();
-    }
     public void createItemCities(int i) throws CityNullException {
         Uti.info("MaFen", "createItemCities", "");
-        bottom.setLayout(new BoxLayout(bottom, BoxLayout.PAGE_AXIS));
+        resultBottom.setLayout(new BoxLayout(resultBottom, BoxLayout.PAGE_AXIS));
         ItemAnswerCity itemAnswerCity = new ItemAnswerCity(this,cities.get(i));
-        bottom.add(itemAnswerCity.cityWeatherInformations.infoCityJTable);
+        resultBottom.add(itemAnswerCity.cityWeatherInformations.infoCityJTable);
     }
 
     public void adjustSizeContent(){
         Uti.info("MaFen", "adjustSizeContent", "");
-        bottom.getInsets();
+        resultBottom.getInsets();
         getInsets();
     }
-    public void adjustBottomSize(){
-        Uti.info("MaFen", "adjustBottomSize", "");
-        bottom.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-90));
-    }
+
     public void mainPanelLayout2(){
         Uti.info("MaFen", "mainPanelLayout", "");
         mainPanel.setBackground(Color.yellow);
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(bottom),BorderLayout.SOUTH);
+        mainPanel.add(new JScrollPane(resultBottom),BorderLayout.SOUTH);
 
     }
     public void mainPanelLayout(){
         Uti.info("TestAlignement","mainPanelLayout","");
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         mainPanel.add(topPanel);
-        mainPanel.add(new JScrollPane(bottom));
+        mainPanel.add(new JScrollPane(resultBottom));
     }
 
     public void addScrollPaneToMaFen(){

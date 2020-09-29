@@ -106,8 +106,6 @@ public class TestConnection {
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.connect();
                 displayServerResponse(httpURLConnection.getResponseCode());
-
-
             } catch (Exception exception) {
                 System.out.println("No Connection");
             }

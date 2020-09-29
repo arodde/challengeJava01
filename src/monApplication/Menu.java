@@ -108,7 +108,7 @@ public MaFen maFen;
         @Override
         public void actionPerformed(ActionEvent e) {
             uti.Uti.info("JMenuItemLocalisationCityListener","actionPerformed()","");
-            maFen.razBottom();
+            maFen.resultBottom.razBottom();
             currentChoice = 1;
             maFen.topPanel.cityLabel.setText("Code Insee : ");
             maFen.topPanel.cityWeatherInformations.setText("                    ");
@@ -121,7 +121,7 @@ public MaFen maFen;
         @Override
         public void actionPerformed(ActionEvent e) {
             uti.Uti.info("JMenuItemLocalisationCitiesListener","actionPerformed()","");
-            maFen.razBottom();
+            maFen.resultBottom.razBottom();
             currentChoice = 2 ;
             maFen.topPanel.cityLabel.setText("Ville : ");
             maFen.topPanel.cityWeatherInformations.setText("                    ");
