@@ -11,10 +11,10 @@ public class ResultBottom extends JPanel {
      * The results of the API's requests display in this panel.
      */
     public MaFen maFen;
-public ResultBottom(MaFen maFen){
-    Uti.info("ResultBottom", "adjustBottomSize", "");
-    this.maFen = maFen;
-}
+    public ResultBottom(MaFen maFen){
+        Uti.info("ResultBottom", "adjustBottomSize", "");
+        this.maFen = maFen;
+    }
     public void adjustBottomSize(){
         Uti.info("ResultBottom", "adjustBottomSize", "");
         setPreferredSize(new Dimension(maFen.getWidth(), maFen.getHeight()-90));

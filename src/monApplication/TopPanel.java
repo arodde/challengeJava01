@@ -65,6 +65,7 @@ public class TopPanel extends JPanel {
             try {
                 TestConnection testConnection = new TestConnection();
                testConnection.testInternetConnection();
+               maFen.cities.clear();
                 requestApi = new RequestApi(maFen);
 
             } catch (IOException ioException) {

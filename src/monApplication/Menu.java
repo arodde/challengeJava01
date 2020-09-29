@@ -10,7 +10,9 @@ public class Menu /*extends JFrame*/ {
 
 
 //    public static Scanner sc;
-    public int currentChoice =0;
+    public int currentChoice =1;
+    // todo add enum
+
     public JMenuBar jMenuBar;
     public JMenu jMenuLocalisation;
 

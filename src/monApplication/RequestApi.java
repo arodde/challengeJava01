@@ -34,6 +34,7 @@ public class RequestApi  {
     }
     public void selectTreatmentInput() throws IOException {
         switch(maFen.menu.currentChoice){
+            // todo ???
             case 1:
                 getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
                 break;
@@ -53,6 +54,7 @@ public class RequestApi  {
         forecastType[6] = "forecast-map-day";
         token = "3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
         maFen.topPanel.requestApi = this;
+        city = new City();
     }
     public void getCityWithInseeCode(String insee) throws IOException {
         /**
@@ -127,76 +129,7 @@ public class RequestApi  {
 
     }
 
-    public void oldGetCitiesWithInputName(String cityName) { // future function's name "getCitiesWithCityName"
-        /**
-         * aim: to do a request to the api and get a json object created
-         * in the memory
-         * ..............................................................
-         * creates an url to connect to an api meteo concept
-         * httpURLConnection.
-         * The request can concern:
-         * - a specific city identified by a insee code
-         * - a list of cities with the same name or a part of name in common  <--------------------------<<
-         *      returns a string of jsonArray empty [] or with one city [{...}] or more cities [{...},...,{...}].
-         * - ...
-         * the api returns a json file with an object or an array of json objects.
-         * the json file is parsed in an json object with the appropriate class
-         * (example: the class city).
-         *
-         * https://api.meteo-concept.com/api/location/cities?token=MON_TOKEN&search=Rennes
-         */
-        Uti.info("RequestApi","getCitiesWithInputName","");
 
-
-
-        City city=new City();
-        param=(cityName!=""?"&search="+cityName:"");
-
-        try {
-            URL url = urlConception(forecastType[1],token,param);
-            System.out.println(url);
-
-
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            try {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                String s =readStream(in); //<in Json en String -
-                System.out.println("s : "+s);
-                JSONParser jsonParser = new JSONParser();
-                ContainerFactory containerFactory = new ContainerFactory() {
-                    @Override
-                    public Map createObjectContainer() {
-                        return new LinkedHashMap<>();
-                    }
-                    @Override
-                    public List creatArrayContainer() {
-                        return new LinkedList<>();
-                    }
-                };
-                Map map= null;
-                try {
-                    map = (Map) jsonParser.parse(s, containerFactory);
-                    JSONParser jsonParser1 = new JSONParser();
-
-                    System.out.println("type : "+ city.getClass());
-                    System.out.println("My city is "+city.getName()+".");
-
-                } catch(ParseException pe) {
-                    System.out.println("position: " + pe.getPosition());
-                    System.out.println(pe);
-                }
-            } finally {
-                urlConnection.disconnect();
-            }
-        }  catch (
-                MalformedURLException e) {
-            e.printStackTrace();
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-        }
-        Uti.mess("sortie run");
-    }
     public boolean isFormatInseeCodeRespected(String insee){
         return Uti.RegularExpressionTest.booleanTestRegex("\\d{5}|d{1}[A-Z]d{3}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers sauf la Corse commençant par 2A ou 2B.");
     }
@@ -207,6 +140,7 @@ public class RequestApi  {
         Uti.info("RequestApi","establishConnectionWithApi","");
         System.out.println(url);
         urlConnection = (HttpURLConnection) url.openConnection();
+        maFen.resultBottom.razBottom();
         try {
            requestSelection();
         } catch (ParseException e) {
@@ -234,8 +168,11 @@ public class RequestApi  {
         JSONParser jsonParser = new JSONParser();
         city =extractJsonObjectFromReceiveResponse( characterStringObtained, jsonParser);
         cityConsoleDescription();
-        maFen.cities.add(city);
+        // todo
+
         this.city = city;
+        if (city.insee!="")
+            maFen.cities.add(city);
         maFen.resultBottom.bottomAnswer();
     }
     public void receivedCitiesApiResponse() throws ParseException, IOException {
@@ -245,7 +182,7 @@ public class RequestApi  {
         System.out.println("characterStringObtained : "+characterStringObtained);
         JSONParser jsonParser = new JSONParser();
         maFen.cities =extractJsonArrayFromReceiveResponse( characterStringObtained, jsonParser);
-//        maFen.cities.add(city);
+        maFen.cities.add(city);
         this.city = city;
         maFen.resultBottom.bottomAnswer();
     }
