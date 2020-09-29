@@ -38,7 +38,8 @@ public class TopPanel extends JPanel {
         cityWeatherInformations.setBackground(Color.white);
         errorLabel.setSize(new Dimension(500,60));
         errorLabel.setBackground(Color.red);
-        cityLabel.setText("Ville : ");
+
+        cityLabel.setText("code insee: ");
         this.setMaximumSize(new Dimension(maFen.getWidth(),cityLabel.getHeight()));
         askSearchButton = new JButton("Demander informations");
         askSearchButton.addActionListener(sendRequestListener);

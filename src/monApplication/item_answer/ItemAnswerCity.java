@@ -17,17 +17,10 @@ public class ItemAnswerCity extends JPanel {
         else {
             this.maFen= maFen;
             title = new JLabel("");
-            // todo à réorganiser pour les éléments de la liste cities
             title.setText(city.getName()) ;
-
             setMaximumSize(new Dimension(maFen.getWidth(),title.getHeight()*7));
             cityWeatherInformations = new CityWeatherInformations(city);
-
             maFen.bottom.add(this.title, BorderLayout.NORTH);
-
         }
-
-
     }
-
 }

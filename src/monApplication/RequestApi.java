@@ -26,12 +26,20 @@ public class RequestApi  {
         Uti.info("RequestApi","RequestApi()","");
         this.maFen = maFen;
         initialisation();
-        // todo function analyse input and use the appropriate request ou ajouter un menu
         try {
-            getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
-//            getCitiesWithInputName(this.maFen.topPanel.cityWeatherInformations.getText().trim());
+            selectTreatmentInput();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void selectTreatmentInput() throws IOException {
+        switch(maFen.menu.currentChoice){
+            case 1:
+                getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
+                break;
+            case 2:
+                getCitiesWithInputName(this.maFen.topPanel.cityWeatherInformations.getText().trim());
+                break;
         }
     }
     public void initialisation(){
@@ -45,7 +53,6 @@ public class RequestApi  {
         forecastType[6] = "forecast-map-day";
         token = "3b057412276cdbe9dcf39dc6ec656d8ef3635c6804b74792cdbbf5d851b8c29f";
         maFen.topPanel.requestApi = this;
-//        token = "";
     }
     public void getCityWithInseeCode(String insee) throws IOException {
         /**
@@ -96,7 +103,7 @@ public class RequestApi  {
         Uti.info("RequestApi","getCitiesWithInputName","");
         City city=new City();
         param=(cityName!=""?"&search="+cityName:"");
-        // todo retirer les caracères spéciaux et remplacer par la lettre simple et l'espace par un '-'
+
 //        param= Uti.RegularExpressionTest.translate(param);
         param= Uti.RegularExpressionTest.replaceForbiddenCharacters(param);
         URL url = urlConception(forecastType[1],token,param.trim());
@@ -194,7 +201,6 @@ public class RequestApi  {
         return Uti.RegularExpressionTest.booleanTestRegex("\\d{5}|d{1}[A-Z]d{3}",insee,"structure code insee correcte","structure code insee incorrecte, besoin d'un nombre composé de 5 entiers sauf la Corse commençant par 2A ou 2B.");
     }
     public boolean isFormatCityNameRespected(String cityName){
-        // todo nom de ville avec espace - ou lettre
         return Uti.RegularExpressionTest.booleanTestRegex("[A-Za-z]([a-zA-Z0-9-]|\\s)*[a-zA-Z0-9]",cityName,"nom de commune correcte","nom de commune incorrect, unique des caractères et le caractère '-'");
     }
     public void establishConnectionWithApi(URL url) throws IOException {
@@ -202,13 +208,22 @@ public class RequestApi  {
         System.out.println(url);
         urlConnection = (HttpURLConnection) url.openConnection();
         try {
-                receivedCityApiResponse();
-//                receivedCitiesApiResponse();
+           requestSelection();
         } catch (ParseException e) {
             System.out.println("la réponse de l'API ne permet pas de trouver une commune correspondant au code insee saisi.");
             e.printStackTrace();
         } finally {
             urlConnection.disconnect();
+        }
+    }
+    public void requestSelection() throws IOException, ParseException {
+        switch(maFen.menu.currentChoice){
+            case 1:
+                receivedCityApiResponse();
+                break;
+            case 2:
+                receivedCitiesApiResponse();
+                break;
         }
     }
     public void receivedCityApiResponse() throws IOException, ParseException {

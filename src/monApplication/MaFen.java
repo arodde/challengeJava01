@@ -27,7 +27,7 @@ public class MaFen extends JFrame implements FocusListener {
     public JScrollPane jScrollPane  = new JScrollPane();
 //    public BorderLayout borderLayout= new BorderLayout();
 //    public TestConnection testConnection = new TestConnection();
-
+public Menu menu= new Menu(this);
     public URL testedUrl;
 //    public String request = "";
 //    public String stringJSON = "";
@@ -38,7 +38,7 @@ public class MaFen extends JFrame implements FocusListener {
     public int widthFrame = 500;
     public int heigthFrame = 500;
     public Dimension dimensionFrame = new Dimension(widthFrame,heigthFrame);
-    // todo add an Arraylist of answerJPanel. the answerJPanel is composed of a title and jtable.
+
 
     public static void main(String[] args) {
         Uti.info("", "", "");
@@ -53,12 +53,13 @@ public class MaFen extends JFrame implements FocusListener {
          * add fields in window
          */
         frameInitialization();
-
+        menu.initMenu();
 // add borderLayout in mainPanel
         topPanelSetting();
         bottomSetting();
         mainPanelLayout();
         addScrollPaneToMaFen();
+
         this.setVisible(true);
     }
     public void frameInitialization(){
