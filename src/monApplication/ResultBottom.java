@@ -12,12 +12,18 @@ public class ResultBottom extends JPanel {
      */
     public MaFen maFen;
     public ResultBottom(MaFen maFen){
-        Uti.info("ResultBottom", "adjustBottomSize", "");
+        Uti.info("ResultBottom", "ResultBottom", "");
         this.maFen = maFen;
+        adjustBottomSize();
     }
     public void adjustBottomSize(){
         Uti.info("ResultBottom", "adjustBottomSize", "");
-        setPreferredSize(new Dimension(maFen.getWidth(), maFen.getHeight()-90));
+        setSize(new Dimension(maFen.getWidth(), ajustHeight()));
+    }
+    public int ajustHeight(){
+        Uti.info("ResultBottom", "ajustHeight", "");
+//        return maFen.heigthFrame-maFen.topPanel.cityWeatherInformations.getHeight();
+        return maFen.heigthFrame- maFen.topPanel.getHeight();
     }
     public void razBottom(){
         Uti.info("ResultBottom", "razBottom", "");
@@ -36,6 +42,7 @@ public class ResultBottom extends JPanel {
     public void updateBottom() throws CityNullException {
         Uti.info("ResultBottom", "updateBottom", "");
         razBottom();
+        setSize(maFen.dimensionFrame.width,maFen.dimensionFrame.height-maFen.topPanel.getHeight());
         for (int i =0 ; i < maFen.cities.size(); i++){
             maFen.createItemCities(i);
         }

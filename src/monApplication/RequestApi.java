@@ -76,13 +76,10 @@ public class RequestApi  {
         Uti.info("RequestApi","getCityWithInseeCode","");
         param=(insee!=""?"&insee="+insee:"");
         URL url = urlConception(forecastType[0],token,param.trim());
-
             if(isFormatInseeCodeRespected(insee))
             {
-
                 establishConnectionWithApi(url);
             }
-
     }
     public void getCitiesWithInputName(String cityName) throws MalformedURLException { // future function's name "getCitiesWithCityName"
         /**
@@ -105,11 +102,8 @@ public class RequestApi  {
         Uti.info("RequestApi","getCitiesWithInputName","");
         City city=new City();
         param=(cityName!=""?"&search="+cityName:"");
-
-//        param= Uti.RegularExpressionTest.translate(param);
         param= Uti.RegularExpressionTest.replaceForbiddenCharacters(param);
         URL url = urlConception(forecastType[1],token,param.trim());
-
         try {
             if(isFormatCityNameRespected(cityName))
             {
@@ -121,12 +115,10 @@ public class RequestApi  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     public static void main(String[] args){
         String testedString="abcdefghijklmnopqrstuvwxyz";
         String testedString2="aâäbcdeéèêëfghiîïjklmnoöôpqrstuùûüvwxyz";
-
     }
 
 

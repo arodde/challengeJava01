@@ -9,17 +9,17 @@ import java.awt.event.ActionListener;
 public class Menu /*extends JFrame*/ {
 
 
-//    public static Scanner sc;
+    //    public static Scanner sc;
     public int currentChoice =1;
     // todo add enum
 
     public JMenuBar jMenuBar;
     public JMenu jMenuLocalisation;
 
-//    public JMenuItem jMenuItemClose ;
+    //    public JMenuItem jMenuItemClose ;
     public JMenuItem jMenuLocalisationCity;
     public JMenuItem jMenuLocalisationCities;
-public MaFen maFen;
+    public MaFen maFen;
     String[] thematic ;
     String[] topicLocalisation;
     public JMenuItemLocalisationCityListener jMenuItemLocalisationCityListener = new JMenuItemLocalisationCityListener();
@@ -110,6 +110,7 @@ public MaFen maFen;
         @Override
         public void actionPerformed(ActionEvent e) {
             uti.Uti.info("JMenuItemLocalisationCityListener","actionPerformed()","");
+            maFen.topPanel.resizeInFrame();
             maFen.resultBottom.razBottom();
             currentChoice = 1;
             maFen.topPanel.cityLabel.setText("Code Insee : ");
@@ -123,6 +124,7 @@ public MaFen maFen;
         @Override
         public void actionPerformed(ActionEvent e) {
             uti.Uti.info("JMenuItemLocalisationCitiesListener","actionPerformed()","");
+            maFen.topPanel.resizeInFrame();
             maFen.resultBottom.razBottom();
             currentChoice = 2 ;
             maFen.topPanel.cityLabel.setText("Ville : ");

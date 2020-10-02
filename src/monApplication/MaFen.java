@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MaFen extends JFrame implements FocusListener {
 
     public TopPanel topPanel;
-//    public JPanel bottom;
+    //    public JPanel bottom;
     public ResultBottom resultBottom;
     public monApplication.CityWeatherInformations cityWeatherInformations;
     public JPanel mainPanel = new JPanel();
@@ -36,7 +36,7 @@ public class MaFen extends JFrame implements FocusListener {
 //    public JSONObject jsonObject = null;
 //    public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
-    public int widthFrame = 500;
+    public int widthFrame = 700;
     public int heigthFrame = 500;
     public Dimension dimensionFrame = new Dimension(widthFrame,heigthFrame);
 
@@ -60,14 +60,14 @@ public class MaFen extends JFrame implements FocusListener {
         bottomSetting();
         mainPanelLayout();
         addScrollPaneToMaFen();
-
+        adjustSizeContent();
         this.setVisible(true);
     }
     public void frameInitialization(){
         Uti.info("MaFen", "frameInitialization", "");
         this.setTitle("Affichage Météo par ville");
         this.setSize(dimensionFrame);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     private void postionFrameInScreen(int posX,int posY){
@@ -86,7 +86,7 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "topPanelSetting", "");
         topPanel = new TopPanel(this);
         topPanel.cityWeatherInformations.addFocusListener(this);
-        topPanel.setPreferredSize(new Dimension(widthFrame, 50));
+        topPanel.resizeInFrame();
     }
 
     public void bottomSetting(){
@@ -103,8 +103,8 @@ public class MaFen extends JFrame implements FocusListener {
 
     public void adjustSizeContent(){
         Uti.info("MaFen", "adjustSizeContent", "");
-        resultBottom.getInsets();
-        getInsets();
+        topPanel.resizeInFrame();
+        resultBottom.adjustBottomSize();
     }
 
     public void mainPanelLayout2(){
@@ -118,7 +118,9 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("TestAlignement","mainPanelLayout","");
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         mainPanel.add(topPanel);
+
         mainPanel.add(new JScrollPane(resultBottom));
+        resultBottom.setVisible(false);
     }
 
     public void addScrollPaneToMaFen(){
@@ -173,11 +175,23 @@ public class MaFen extends JFrame implements FocusListener {
     @Override
     public void focusGained(FocusEvent focusEvent) {
         System.out.println("maFen : FocusGained");
+        topPanel.resizeInFrame();
+        if(resultBottom!=null){
+            resultBottom.adjustBottomSize();
+//            topPanel.resizeInFrame();
+        }
+
     }
 
     @Override
     public void focusLost(FocusEvent focusEvent) {
         System.out.println("maFen : FocusLost");
+        topPanel.resizeInFrame();
+        if(resultBottom!=null){
+            resultBottom.adjustBottomSize();
+//            topPanel.resizeInFrame();
+        }
+
     }
 
 
