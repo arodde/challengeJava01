@@ -51,7 +51,7 @@ public class TopPanel extends JPanel {
 //        cityLabel.setBackground(Color.green);
 //        cityWeatherInformations.setBackground(Color.);
 //        askSearchButton.setBackground(Color.gray);
-        errorLabel.setBackground(Color.red);
+//        errorLabel.setBackground(Color.red);
 
     }
 
