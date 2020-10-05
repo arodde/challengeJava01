@@ -103,7 +103,7 @@ public class TopPanel extends JPanel {
             maFen.resultBottom.setVisible(true);
 //            maFen.topPanel.setSize(maFen.dimensionFrame.width,40);
             maFen.adjustSizeContent();
-            maFen.resultBottom.setBackground(Color.red);
+//            maFen.resultBottom.setBackground(Color.red);
             maFen.caft(maFen);
             System.out.println("fin thread");
         }
