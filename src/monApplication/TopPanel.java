@@ -48,11 +48,15 @@ public class TopPanel extends JPanel {
     public void colorationElements(){
 
         setBackground(Color.gray);
-        cityLabel.setBackground(Color.green);
-        cityWeatherInformations.setBackground(Color.yellow);
-        askSearchButton.setBackground(Color.gray);
-        errorLabel.setBackground(Color.red);
-        maFen.mainPanel.setBackground(Color.MAGENTA);
+
+
+
+//        cityLabel.setBackground(Color.green);
+//        cityWeatherInformations.setBackground(Color.);
+//        askSearchButton.setBackground(Color.gray);
+//        errorLabel.setBackground(Color.red);
+
+
     }
 
     public void positionOnTopPanel(){
