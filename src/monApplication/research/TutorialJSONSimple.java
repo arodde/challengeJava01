@@ -266,7 +266,7 @@ public class TutorialJSONSimple {
             city = new City();
             city = cityAffectation(city, (JSONObject) arrayObjectCities.get(i));
             myCities.add(city);
-            city= null;
+//            city= null;
         }
         return myCities;
     }

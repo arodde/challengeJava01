@@ -10,9 +10,11 @@ public class Menu /*extends JFrame*/ {
 
 
     //    public static Scanner sc;
-    public int currentChoice =1;
     // todo add enum
-
+    public MenuOption menuOption;
+    public int currentChoice = 0;
+    MenuOption l1 = MenuOption.CITYBYCODEINSEE;
+    MenuOption l2 = MenuOption.CITIESBYNAME;
     public JMenuBar jMenuBar;
     public JMenu jMenuLocalisation;
 
@@ -43,6 +45,7 @@ public class Menu /*extends JFrame*/ {
          *  - initMenu
          */
         this.maFen = maFen;
+        currentChoice = menuOption.CITYBYCODEINSEE.giveNumberValue();
 //        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 //        setTitle("AirBnB");
 //        setResizable(false);
@@ -63,6 +66,7 @@ public class Menu /*extends JFrame*/ {
         menuLayout();
         addButtonMenuActionListener();
         maFen.setJMenuBar(jMenuBar);
+        System.out.println(menuOption.CITYBYCODEINSEE.ordinal());
     }
     public void addButtonMenuActionListener(){
         jMenuLocalisationCity.addActionListener(jMenuItemLocalisationCityListener);
@@ -112,7 +116,8 @@ public class Menu /*extends JFrame*/ {
             uti.Uti.info("JMenuItemLocalisationCityListener","actionPerformed()","");
             maFen.topPanel.resizeInFrame();
             maFen.resultBottom.razBottom();
-            currentChoice = 1;
+            // todo enum
+            currentChoice = menuOption.CITYBYCODEINSEE.giveNumberValue();
             maFen.topPanel.cityLabel.setText("Code Insee : ");
             maFen.topPanel.cityWeatherInformations.setText("                    ");
         }
@@ -126,7 +131,8 @@ public class Menu /*extends JFrame*/ {
             uti.Uti.info("JMenuItemLocalisationCitiesListener","actionPerformed()","");
             maFen.topPanel.resizeInFrame();
             maFen.resultBottom.razBottom();
-            currentChoice = 2 ;
+            // todo enum
+            currentChoice = menuOption.CITIESBYNAME.ordinal();
             maFen.topPanel.cityLabel.setText("Ville : ");
             maFen.topPanel.cityWeatherInformations.setText("                    ");
 

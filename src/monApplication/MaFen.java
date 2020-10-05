@@ -111,20 +111,26 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "mainPanelLayout", "");
         mainPanel.setBackground(Color.yellow);
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(resultBottom),BorderLayout.SOUTH);
+        mainPanel.add(new JScrollPane(resultBottom),BorderLayout.CENTER);
 
     }
     public void mainPanelLayout(){
-        Uti.info("TestAlignement","mainPanelLayout","");
+        Uti.info("MaFen","mainPanelLayout","");
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         mainPanel.add(topPanel);
-
         mainPanel.add(new JScrollPane(resultBottom));
         resultBottom.setVisible(false);
+        caft(this);
     }
-
+    public void caft(MaFen maFen){
+        Uti.info("MaFen","caft","");
+        System.out.println("maFen        "+maFen.getWidth()+" "+maFen.getHeight());
+        System.out.println("topPanel     "+maFen.topPanel.getWidth()+" "+maFen.topPanel.getHeight());
+        System.out.println("mainPanel     "+maFen.mainPanel.getWidth()+" "+maFen.mainPanel.getHeight());
+        System.out.println("resultBottom "+maFen.resultBottom.getWidth()+" "+maFen.resultBottom.getHeight());
+    }
     public void addScrollPaneToMaFen(){
-        Uti.info("TestAlignement","addScrollPaneToMaFen","");
+        Uti.info("MaFen","addScrollPaneToMaFen","");
         /**T
          * para 1 : target of the JScrollPane
          */
@@ -155,6 +161,7 @@ public class MaFen extends JFrame implements FocusListener {
         }
     }
     public void apiFound(URL url) throws IOException {
+        Uti.info("MaFen","apiFound","");
         URLConnection connection = url.openConnection();
         connection.connect();
         System.out.println("1");
@@ -162,6 +169,7 @@ public class MaFen extends JFrame implements FocusListener {
         topPanel.errorLabel.setText("Vous êtes connectés à internet");
     }
     public void apiNotFound(){
+        Uti.info("MaFen","apiNotFound","");
         System.out.println("2");
         System.out.println("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");
         topPanel.errorLabel.setText("La connexion à internet est valide, mais l'url " + testedUrl + " est invalide.");

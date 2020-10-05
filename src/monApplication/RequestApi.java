@@ -33,12 +33,13 @@ public class RequestApi  {
         }
     }
     public void selectTreatmentInput() throws IOException {
+        Uti.info("RequestApi","selectTreatmentInput()","");
         switch(maFen.menu.currentChoice){
             // todo ???
-            case 1:
+            case 0:
                 getCityWithInseeCode(this.maFen.topPanel.cityWeatherInformations.getText().trim());
                 break;
-            case 2:
+            case 1:
                 getCitiesWithInputName(this.maFen.topPanel.cityWeatherInformations.getText().trim());
                 break;
         }
@@ -143,11 +144,12 @@ public class RequestApi  {
         }
     }
     public void requestSelection() throws IOException, ParseException {
+//        switch(maFen.menu.currentChoice){
         switch(maFen.menu.currentChoice){
-            case 1:
+            case 0:
                 receivedCityApiResponse();
                 break;
-            case 2:
+            case 1:
                 receivedCitiesApiResponse();
                 break;
         }
@@ -229,7 +231,7 @@ public class RequestApi  {
     }
     private String readStream(InputStream is) throws IOException {
         /**
-         * this function creates a string with a inputsSream got
+         * This function creates a chain from an input stream
          * para 1 : InputStream : stream
          * returns : String
          */

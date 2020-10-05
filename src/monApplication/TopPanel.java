@@ -48,11 +48,11 @@ public class TopPanel extends JPanel {
     public void colorationElements(){
 
         setBackground(Color.gray);
-//        cityLabel.setBackground(Color.green);
-//        cityWeatherInformations.setBackground(Color.);
-//        askSearchButton.setBackground(Color.gray);
+        cityLabel.setBackground(Color.green);
+        cityWeatherInformations.setBackground(Color.yellow);
+        askSearchButton.setBackground(Color.gray);
         errorLabel.setBackground(Color.red);
-
+        maFen.mainPanel.setBackground(Color.MAGENTA);
     }
 
     public void positionOnTopPanel(){
@@ -72,7 +72,7 @@ public class TopPanel extends JPanel {
     public void resizeInFrame(){
         Uti.info("SendRequestListener", "actionPerformed","");
 //        this.setSize(maFen.getWidth(),     cityLabel.getMaximumSize().height*2);
-        this.setSize(maFen.getWidth(),     35);
+        this.setSize(maFen.mainPanel.getWidth(),     35);
     }
 
 
@@ -100,6 +100,7 @@ public class TopPanel extends JPanel {
 //            maFen.topPanel.setSize(maFen.dimensionFrame.width,40);
             maFen.adjustSizeContent();
             maFen.resultBottom.setBackground(Color.red);
+            maFen.caft(maFen);
             System.out.println("fin thread");
         }
     }
