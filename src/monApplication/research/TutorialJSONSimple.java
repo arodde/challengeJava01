@@ -261,6 +261,7 @@ public class TutorialJSONSimple {
     public ArrayList<City> citiesCourse( JSONArray arrayObjectCities,ArrayList<City> myCities){
         Uti.info("TutorialJSONSimple","citiesCourse","");
         City city ;
+        //todo correction affi dernière cities vide
         for(int i = 0 ; i < arrayObjectCities.size(); i++){
             System.out.println(arrayObjectCities.get(i));
             city = new City();

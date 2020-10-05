@@ -81,7 +81,7 @@ public class TopPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             Uti.info("SendRequestListener", "actionPerformed","");
             cityWeatherInformations.getText().trim();
-            // todo thread
+
             run();
         }
 
