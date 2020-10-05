@@ -174,8 +174,9 @@ public class RequestApi  {
         System.out.println("characterStringObtained : "+characterStringObtained);
         JSONParser jsonParser = new JSONParser();
         maFen.cities =extractJsonArrayFromReceiveResponse( characterStringObtained, jsonParser);
-        maFen.cities.add(city);
-        this.city = city;
+        // todo rectif liste remplie enlèvement ajout supplémentaire
+//        maFen.cities.add(city);
+//        this.city = city;
         maFen.resultBottom.bottomAnswer();
     }
     public City extractJsonObjectFromReceiveResponse( String characterStringObtained,  JSONParser jsonParser) throws ParseException {

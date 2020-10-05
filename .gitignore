@@ -4,3 +4,5 @@ out/
 resources/inforeleases.txt
 .gradle/
 src/testeur/
+.jdb
+
