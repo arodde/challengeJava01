@@ -109,7 +109,7 @@ public class MaFen extends JFrame implements FocusListener {
 
     public void mainPanelLayout2(){
         Uti.info("MaFen", "mainPanelLayout", "");
-        mainPanel.setBackground(Color.yellow);
+//        mainPanel.setBackground(Color.yellow);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(resultBottom),BorderLayout.SOUTH);
 
