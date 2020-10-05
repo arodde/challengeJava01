@@ -49,7 +49,7 @@ public class ResultBottom extends JPanel {
         Uti.info("ResultBottom", "updateBottom", "");
         razBottom();
         setSize(maFen.dimensionFrame.width,maFen.dimensionFrame.height-maFen.topPanel.getHeight());
-        for (int i =0 ; i < maFen.cities.size()-1; i++){
+        for (int i =0 ; i < maFen.cities.size(); i++){
             maFen.createItemCities(i);
         }
     }
