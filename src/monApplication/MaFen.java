@@ -37,8 +37,8 @@ public class MaFen extends JFrame implements FocusListener {
 //    public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
     public int widthFrame = 700;
-    public int heigthFrame = 500;
-    public Dimension dimensionFrame = new Dimension(widthFrame,heigthFrame);
+    public int heightFrame = 600;
+    public Dimension dimensionFrame = new Dimension(widthFrame, heightFrame);
 
 
     public static void main(String[] args) {
@@ -92,6 +92,7 @@ public class MaFen extends JFrame implements FocusListener {
     public void bottomSetting(){
         Uti.info("MaFen", "bottomSetting", "");
         resultBottom = new ResultBottom(this);
+
     }
 
     public void createItemCities(int i) throws CityNullException {
@@ -111,12 +112,14 @@ public class MaFen extends JFrame implements FocusListener {
         Uti.info("MaFen", "mainPanelLayout", "");
 //        mainPanel.setBackground(Color.yellow);
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(resultBottom),BorderLayout.CENTER);
+
+        mainPanel.add(new JScrollPane(resultBottom),BorderLayout.SOUTH);
 
     }
     public void mainPanelLayout(){
         Uti.info("MaFen","mainPanelLayout","");
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+        mainPanel.setSize(dimensionFrame);
         mainPanel.add(topPanel);
         mainPanel.add(new JScrollPane(resultBottom));
         resultBottom.setVisible(false);

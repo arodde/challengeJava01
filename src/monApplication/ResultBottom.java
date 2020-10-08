@@ -25,10 +25,10 @@ public class ResultBottom extends JPanel {
 //        return maFen.heigthFrame-maFen.topPanel.cityWeatherInformations.getHeight();
 
         int i =maFen.mainPanel.getHeight() - maFen.topPanel.getHeight();
-        System.out.println("maFen.geHeight - maFen.topPanel  =  "+ i);
+        System.out.println("maFen.mainPanel.getHeight() - maFen.topPanel.getHeight() =  "+ i);
 
 
-        return maFen.topPanel.getHeight() - maFen.topPanel.getHeight();
+        return maFen.getHeight() - maFen.topPanel.getHeight();
 
     }
     public void razBottom(){
