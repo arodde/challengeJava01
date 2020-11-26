@@ -13,7 +13,7 @@ Il permet la connexion à une api (meteo concept) et récupére des données de 
 Recherche par code insee:
 
 
-saisi dans le champ la valeur du code insee et cliquer sur le bouton de validation. Le résultat apparaitra en dessous.
+Saisir dans le champ la valeur du code insee et cliquer sur le bouton de validation. Le résultat apparaitra en dessous.
 
 
 ##Recherche par nom de commune:
