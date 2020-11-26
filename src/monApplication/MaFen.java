@@ -123,7 +123,7 @@ public class MaFen extends JFrame implements FocusListener {
         mainPanel.add(topPanel);
         mainPanel.add(new JScrollPane(resultBottom));
         resultBottom.setVisible(false);
-        caft(this);
+//        caft(this);
     }
     public void caft(MaFen maFen){
         Uti.info("MaFen","caft","");
@@ -228,3 +228,4 @@ public class MaFen extends JFrame implements FocusListener {
         }
     }
 }
+

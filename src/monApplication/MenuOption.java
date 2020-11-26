@@ -1,7 +1,9 @@
 package monApplication;
 
 public enum MenuOption {
-
+    /**
+     * Enumaration to facilitate the utilisation of menu
+     */
     CITYBYCODEINSEE (0,"Recherche par code insee"),
     CITIESBYNAME (1,"Recherche par nom de communes") ;
 //    CITYBYCODEINSEE (0),
