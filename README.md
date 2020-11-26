@@ -17,5 +17,6 @@ saisi dans le champ la valeur du code insee et cliquer sur le bouton de validati
 
 
 ##Recherche par nom de commune:
+
 Cliquer sur le bouton localisation du menu pour sélectionner l'option de localisation par ville.
 Saisir dans le champ le nom de la commune ou une partie. L'affichage en dessous donne une liste de communes concernée ou la commune concernée. Si aucune commune ne correspond ("zz" par exemple), aucun affichage ne sera donné.
