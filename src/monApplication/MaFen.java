@@ -37,7 +37,7 @@ public class MaFen extends JFrame implements FocusListener {
 //    public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
     public int widthFrame = 700;
-    public int heightFrame = 600;
+    public int heightFrame = 400;
     public Dimension dimensionFrame = new Dimension(widthFrame, heightFrame);
 
 
@@ -105,7 +105,9 @@ public class MaFen extends JFrame implements FocusListener {
     public void adjustSizeContent(){
         Uti.info("MaFen", "adjustSizeContent", "");
         topPanel.resizeInFrame();
+
         resultBottom.adjustBottomSize();
+        mainPanel.setSize(this.getWidth(), (int) (topPanel.getSize().getHeight()+ resultBottom.getSize().getHeight()));
     }
 
     public void mainPanelLayout2(){

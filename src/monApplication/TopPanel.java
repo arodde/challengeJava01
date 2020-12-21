@@ -71,7 +71,7 @@ public class TopPanel extends JPanel {
     public void resizeInFrame(){
         Uti.info("SendRequestListener", "actionPerformed","");
 //        this.setSize(maFen.getWidth(),     cityLabel.getMaximumSize().height*2);
-        this.setSize(maFen.mainPanel.getWidth(),     35);
+        this.setSize(maFen.mainPanel.getWidth(),     82);
     }
 
 

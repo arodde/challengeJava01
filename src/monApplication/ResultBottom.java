@@ -24,7 +24,8 @@ public class ResultBottom extends JPanel {
         Uti.info("ResultBottom", "ajustHeight", "");
 //        return maFen.heigthFrame-maFen.topPanel.cityWeatherInformations.getHeight();
 
-        int i =maFen.mainPanel.getHeight() - maFen.topPanel.getHeight();
+//        int i =maFen.mainPanel.getHeight() - maFen.topPanel.getHeight();
+        int i =maFen.getHeight() - maFen.topPanel.getHeight();
         System.out.println("maFen.mainPanel.getHeight() - maFen.topPanel.getHeight() =  "+ i);
 
 
