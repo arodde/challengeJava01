@@ -36,8 +36,8 @@ public class MaFen extends JFrame implements FocusListener {
 //    public JSONObject jsonObject = null;
 //    public ItemAnswerCity itemAnswerCity;
     public ArrayList<City> cities = new ArrayList<City>();
-    public int widthFrame = 700;
-    public int heightFrame = 400;
+    public int widthFrame = 500;
+    public int heightFrame = 300;
     public Dimension dimensionFrame = new Dimension(widthFrame, heightFrame);
 
 
