@@ -204,7 +204,9 @@ public class RequestApi  {
         return city;
     }
     public ArrayList<City> extractJsonArrayFromReceiveResponse( String characterStringObtained,  JSONParser jsonParser) throws ParseException {
-
+        /**
+         * extracts api response and fills the arrayList of cities.
+         */
         Uti.info("RequestApi","extractJsonArrayFromReceiveResponse","");
         ContainerFactory containerFactory = new ContainerFactory() {
             @Override

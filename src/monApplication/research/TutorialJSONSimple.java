@@ -202,7 +202,7 @@ public class TutorialJSONSimple {
         }
     }
     public City displaysCityJSONStringContentFromJsonString(String jsonString){
-        Uti.info("TutorialJSONSimple","displaysCityJSONFileContent","");
+        Uti.info("TutorialJSONSimple","displaysCityJSONStringContentFromJsonString","");
         /**
          * uses a JSON String from a file and create an object
          * para 1 : String : json string
@@ -232,8 +232,8 @@ public class TutorialJSONSimple {
     public ArrayList<City> displaysCitiesJSONStringContentFromJsonFile(String characterStringObtained) throws ParseException {
         Uti.info("TutorialJSONSimple","displaysCitiesJSONStringContentFromJsonFile","");
         /**
-         * uses a JSON String from a file and create a list of cities
-         * para 1 : String : path of the file
+         * Creates with a JSON String a list of cities
+         * para 1 : String : JSON string
          * return value : cities
          */
 //        Reader reader = null;
